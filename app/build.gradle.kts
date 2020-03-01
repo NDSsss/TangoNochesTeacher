@@ -19,6 +19,7 @@ android {
         versionName = "1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
     }
 
     compileOptions {
@@ -31,6 +32,7 @@ android {
             isMinifyEnabled = false
         }
     }
+
 }
 
 
@@ -61,6 +63,7 @@ dependencies {
     implementation("me.dm7.barcodescanner:zxing:1.9.13")
     implementation("me.dm7.barcodescanner:zbar:1.9.13")
     implementation("org.conscrypt:conscrypt-android:2.2.1")
+    implementation("androidx.multidex:multidex:2.0.0")
 
     implementation(ext["dagger"] as String)
     kapt(ext["daggerCompiler"] as String)

@@ -1,10 +1,10 @@
 package com.tangonoches.teacher
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.tangonoches.teacher.di.ComponentsHolder
 import com.tangonoches.teacher.di.components.DaggerMainComponent
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

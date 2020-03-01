@@ -1,7 +1,7 @@
 package com.tangonoches.teacher.presentation.login
 
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.tangonoches.teacher.domain.repositories.ILoginRepository
+import com.tangonoches.teacher.domain.repositories.login.ILoginRepository
 import com.tangonoches.teacher.presentation.base.BaseVm
 import javax.inject.Inject
 

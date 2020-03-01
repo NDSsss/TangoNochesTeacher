@@ -6,7 +6,7 @@ import com.tangonoches.teacher.di.vm.VmFactory
 import com.tangonoches.teacher.di.vm.VmKeyName
 import com.tangonoches.teacher.presentation.login.LoginVm
 import com.tangonoches.teacher.presentation.main.MainDrawerVm
-import com.tangonoches.teacher.presentation.main.ui.home.HomeVm
+import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonsVm
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -22,8 +22,8 @@ interface VmModule {
 
     @Binds
     @IntoMap
-    @VmKeyName(HomeVm::class)
-    fun bindHomeFragmentVm(viewModel: HomeVm): ViewModel
+    @VmKeyName(LessonsVm::class)
+    fun bindLessonsFragmentVm(viewModel: LessonsVm): ViewModel
 
     @Binds
     @IntoMap

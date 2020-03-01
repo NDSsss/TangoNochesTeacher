@@ -1,4 +1,4 @@
-package com.tangonoches.teacher.domain.repositories
+package com.tangonoches.teacher.domain.repositories.login
 
 import io.reactivex.Single
 

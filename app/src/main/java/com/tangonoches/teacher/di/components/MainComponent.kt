@@ -15,6 +15,7 @@ import javax.inject.Singleton
         WebDataSourcesModule::class,
         RepositoriesModule::class,
         ServicesModule::class,
+        InteractorsModule::class,
         VmModule::class
     ]
 )

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/base_margin_half"
+    android:layout_marginStart="@dimen/base_margin"
+    android:layout_marginEnd="@dimen/base_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_lesson_short_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_margin_half"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Фолк Антон и Настя" />
+
+    <TextView
+        android:id="@+id/item_lesson_short_date_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_margin_half"
+        android:paddingBottom="@dimen/base_margin_half"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_lesson_short_name_tv"
+        tools:text="25.03.2020" />
+
+    <TextView
+        android:id="@+id/item_lesson_short_group_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_margin"
+        android:layout_marginTop="@dimen/base_margin_half"
+        app:layout_constraintStart_toEndOf="@id/item_lesson_short_date_tv"
+        app:layout_constraintTop_toBottomOf="@id/item_lesson_short_name_tv"
+        tools:text="Продвинутые" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
