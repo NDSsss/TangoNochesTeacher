@@ -11,6 +11,8 @@
         <item name="actionMenuTextColor">@color/colorAppAccent</item>
         <item name="buttonStyle">@style/ButtonsStyle</item>
         <item name="editTextColor">@color/textColorWhiteHalf</item>
+        <item name="android:popupBackground">@color/colorPrimary</item>
+        <item name="android:itemBackground">@color/colorPrimary</item>
     </style>
 
     <style name="ButtonsStyle" parent="Widget.AppCompat.Button.Borderless.Colored">
@@ -23,10 +25,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

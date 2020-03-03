@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.tangonoches.teacher.di.ComponentsHolder
 import com.tangonoches.teacher.di.VmFactoryWrapper
 import io.reactivex.disposables.CompositeDisposable
@@ -46,6 +48,7 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         vm.viewCreated()
         initEvents()
+        vm.viewCreatedAction.accept(Unit)
     }
 
 
@@ -78,5 +81,13 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
     override fun onDestroyView() {
         eventBinds.clear()
         super.onDestroyView()
+    }
+
+    protected fun openFragment(@IdRes id: Int, bundle:Bundle? = null){
+        if(bundle != null){
+            findNavController().navigate(id, bundle)
+        }else {
+            findNavController().navigate(id)
+        }
     }
 }

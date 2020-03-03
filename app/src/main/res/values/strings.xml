@@ -22,8 +22,12 @@
     <string name="menu_lessons_title">Уроки</string>
     <string name="menu_lessons_all">Все уроки</string>
     <string name="menu_lessons_add">Добавить</string>
+    <string name="menu_lessons_detail">Редактировать урок</string>
 
     <string name="menu_tickets_title">Абонименты</string>
     <string name="menu_tickets_all">Все абонименты</string>
     <string name="menu_tickets_add">Добавить</string>
+
+    <string name="lesson_detail_name_hint">Название урока</string>
+    <string name="lesson_detail_group_hint">Группа</string>
 </resources>

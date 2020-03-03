@@ -1,5 +1,6 @@
 package com.tangonoches.teacher.presentation.main.ui.lessons.allLessons
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,10 @@ import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.data.models.LessonShortModel
 import kotlinx.android.synthetic.main.item_lesson_short.view.*
 
-class LessonsAdapter(private val requestNexPage: () -> Unit) :
+class LessonsAdapter(
+    private val requestNexPage: () -> Unit,
+    private val openDetail: (lessonId: Long) -> Unit
+) :
     RecyclerView.Adapter<LessonShortVh>() {
 
     private var lessons = listOf<LessonShortModel>()
@@ -40,7 +44,11 @@ class LessonsAdapter(private val requestNexPage: () -> Unit) :
     override fun getItemCount(): Int = lessons.size
 
     override fun onBindViewHolder(holder: LessonShortVh, position: Int) {
-        holder.bind(lessons[position], groups.firstOrNull { group -> group.id == lessons[position].groupId })
+        holder.bind(
+            lessons[position],
+            groups.firstOrNull { group -> group.id == lessons[position].groupId },
+            openDetail
+        )
         if (position == lessons.size - 4 && hasMoreLessons) {
             requestNexPage.invoke()
         }
@@ -48,9 +56,18 @@ class LessonsAdapter(private val requestNexPage: () -> Unit) :
 }
 
 class LessonShortVh(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(lessonShort: LessonShortModel, group: GroupFullModel?) {
+    fun bind(
+        lessonShort: LessonShortModel,
+        group: GroupFullModel?,
+        detailListener: (lessonId: Long) -> Unit
+    ) {
+        Log.d("APP_TAG", "LessonShortVh bind $lessonShort")
         itemView.item_lesson_short_name_tv.text = lessonShort.name
         itemView.item_lesson_short_date_tv.text = lessonShort.lessonDate
+        itemView.item_lesson_short_detail_iv.setOnClickListener {
+            Log.d("APP_TAG", "LessonShortVh setOnClickListener ${lessonShort.id}")
+            detailListener(lessonShort.id)
+        }
         group?.let { itemView.item_lesson_short_group_tv.text = it.name }
     }
 }

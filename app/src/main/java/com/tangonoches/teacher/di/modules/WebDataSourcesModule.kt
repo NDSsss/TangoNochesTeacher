@@ -6,6 +6,10 @@ import com.tangonoches.teacher.domain.datasources.web.lessons.ILessonsDataSource
 import com.tangonoches.teacher.domain.datasources.web.lessons.LessonsDataSource
 import com.tangonoches.teacher.domain.datasources.web.login.ILoginDataSource
 import com.tangonoches.teacher.domain.datasources.web.login.LoginDataSource
+import com.tangonoches.teacher.domain.datasources.web.students.IStudentsDataSource
+import com.tangonoches.teacher.domain.datasources.web.students.StudentsDataSource
+import com.tangonoches.teacher.domain.datasources.web.teachers.ITeachersDataSource
+import com.tangonoches.teacher.domain.datasources.web.teachers.TeachersDataSource
 import com.tangonoches.teacher.domain.datasources.web.ticketCountTypes.ITicketCountTypesDataSource
 import com.tangonoches.teacher.domain.datasources.web.ticketCountTypes.TicketCountTypesDataSource
 import com.tangonoches.teacher.domain.datasources.web.ticketEventTypes.ITicketEventTypesDataSource
@@ -47,4 +51,16 @@ class WebDataSourcesModule {
     fun provideTicketCountTypesDataSource(
         service: TicketCountTypesService
     ): ITicketCountTypesDataSource = TicketCountTypesDataSource(service)
+
+    @Provides
+    @Singleton
+    fun provideStudentsDataSource(
+        service: StudentsService
+    ): IStudentsDataSource = StudentsDataSource(service)
+
+    @Provides
+    @Singleton
+    fun provideTeachersDataSource(
+        service: TeachersService
+    ): ITeachersDataSource = TeachersDataSource(service)
 }

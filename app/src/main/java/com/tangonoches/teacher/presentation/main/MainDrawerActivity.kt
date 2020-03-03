@@ -49,7 +49,9 @@ class MainDrawerActivity : BaseVmActivity<MainDrawerVm>() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_lessons_all, R.id.nav_lessons_add, R.id.nav_tickets_all,
+                R.id.nav_lessons_all,
+                R.id.nav_lessons_add,
+                R.id.nav_tickets_all,
                 R.id.nav_tickets_add
             ), drawerLayout
         )

@@ -1,5 +1,6 @@
 package com.tangonoches.teacher.domain.datasources.web.lessons
 
+import com.tangonoches.teacher.data.models.LessonFullModel
 import com.tangonoches.teacher.data.models.LessonShortModel
 import com.tangonoches.teacher.data.responses.lessons.toModel
 import com.tangonoches.teacher.domain.datasources.web.login.subToThreads
@@ -17,4 +18,11 @@ class LessonsDataSource(
             constantsRepository.itemsOnPage
         ).map { response -> response.data.map { item -> item.toModel() } }
             .subToThreads()
+
+    override fun getLessonById(id: Long): Single<LessonFullModel> =
+        lessonsService.getLessonById(id)
+            .subToThreads()
+            .map { response ->
+                response.data.toModel()
+            }
 }

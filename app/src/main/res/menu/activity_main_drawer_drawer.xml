@@ -2,24 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <group android:checkableBehavior="single">
-        <item android:title="@string/menu_lessons_title">
-            <menu>
-                <item android:id="@+id/nav_lessons_all"
-                    android:title="@string/menu_lessons_all"/>
-                <item android:id="@+id/nav_lessons_add"
-                    android:title="@string/menu_lessons_add"/>
-            </menu>
-        </item>
-        <item android:title="@string/menu_tickets_title">
-            <menu>
-                <item android:id="@+id/nav_tickets_all"
-                    android:title="@string/menu_tickets_all"/>
-                <item android:id="@+id/nav_tickets_add"
-                    android:title="@string/menu_tickets_add"/>
-            </menu>
-        </item>
-    </group>
+    <item android:id="@+id/nav_lessons_all"
+        android:icon="@drawable/ic_lesson_add"
+        android:title="@string/menu_lessons_all"/>
+    <item android:id="@+id/nav_tickets_all"
+        android:icon="@drawable/ic_lesson_add"
+        android:title="@string/menu_tickets_all"/>
 
 </menu>

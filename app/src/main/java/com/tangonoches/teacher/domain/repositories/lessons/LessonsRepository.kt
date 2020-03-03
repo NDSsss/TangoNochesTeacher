@@ -1,5 +1,6 @@
 package com.tangonoches.teacher.domain.repositories.lessons
 
+import com.tangonoches.teacher.data.models.LessonFullModel
 import com.tangonoches.teacher.data.models.LessonShortModel
 import com.tangonoches.teacher.domain.datasources.web.lessons.ILessonsDataSource
 import io.reactivex.Single
@@ -9,4 +10,7 @@ class LessonsRepository(
 ) : ILessonsRepository {
     override fun getAllLessons(page: Int): Single<List<LessonShortModel>> =
         lessonsDataSource.getAllLessons(page)
+
+    override fun getLessonById(id: Long): Single<LessonFullModel> =
+        lessonsDataSource.getLessonById(id)
 }

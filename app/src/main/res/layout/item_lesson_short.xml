@@ -38,4 +38,14 @@
         app:layout_constraintTop_toBottomOf="@id/item_lesson_short_name_tv"
         tools:text="Продвинутые" />
 
+    <ImageView
+        android:id="@+id/item_lesson_short_detail_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/base_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_edit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

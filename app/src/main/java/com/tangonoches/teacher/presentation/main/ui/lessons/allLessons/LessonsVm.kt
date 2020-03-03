@@ -6,7 +6,6 @@ import com.jakewharton.rxrelay2.PublishRelay
 import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.data.models.LessonShortModel
 import com.tangonoches.teacher.domain.interactors.ILessonsInteractor
-import com.tangonoches.teacher.domain.repositories.lessons.ILessonsRepository
 import com.tangonoches.teacher.presentation.base.BaseVm
 import javax.inject.Inject
 
@@ -29,25 +28,27 @@ class LessonsVm @Inject constructor(
     override fun createBinds() {
         super.createBinds()
         binds.addAll(
-            requestLessonsAction.subscribe {
-                currentPage = 1
-                lessonsInteractor.getFirstLessonsPageWithGroups()
-                    .subscribe { pair ->
-                        groupsValue.accept(pair.first)
-                        currentPage++
-                        if(pair.second.isNotEmpty()) {
-                            lessonsLeftEffect.accept(true)
-                            allLessonsValue.accept(allLessonsValue.value!!.plus(pair.second))
-                        } else {
-                            lessonsLeftEffect.accept(false)
+            requestLessonsAction
+                .filter { groupsValue.hasValue().not() }
+                .subscribe {
+                    currentPage = 1
+                    lessonsInteractor.getFirstLessonsPageWithGroups()
+                        .subscribe { pair ->
+                            groupsValue.accept(pair.first)
+                            currentPage++
+                            if (pair.second.isNotEmpty()) {
+                                lessonsLeftEffect.accept(true)
+                                allLessonsValue.accept(allLessonsValue.value!!.plus(pair.second))
+                            } else {
+                                lessonsLeftEffect.accept(false)
+                            }
                         }
-                    }
-            },
+                },
             requestNextPageAction.subscribe {
                 lessonsInteractor.getLessonsPage(currentPage)
                     .subscribe { newLessons ->
                         currentPage++
-                        if(newLessons.isNotEmpty()) {
+                        if (newLessons.isNotEmpty()) {
                             lessonsLeftEffect.accept(true)
                             allLessonsValue.accept(allLessonsValue.value!!.plus(newLessons))
                         } else {

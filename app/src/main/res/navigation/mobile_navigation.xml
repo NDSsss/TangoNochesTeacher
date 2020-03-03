@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
+        android:id="@+id/nav_lessons_detail"
+        android:name="com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail.LessonDetailFragment"
+        android:label="@string/menu_lessons_detail"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
         android:id="@+id/nav_tickets_all"
         android:name="com.tangonoches.teacher.presentation.main.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_tickets_all"
