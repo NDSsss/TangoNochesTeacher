@@ -46,11 +46,14 @@ dependencies {
 
     implementation(ext["kotlin-stdlib"] as String)
 
+    implementation(project(":chipviewtestnew"))
+
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment:2.2.1")
     implementation("androidx.navigation:navigation-ui:2.2.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
+//    implementation("com.github.jakebonk:ChipView:1.0.1")
 
     (ext["baseAndroidDependencies"] as List<String>)
             .plus(ext["baseRxDependencies"] as List<String>)

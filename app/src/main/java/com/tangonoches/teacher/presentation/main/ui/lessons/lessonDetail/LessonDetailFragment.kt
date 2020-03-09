@@ -3,6 +3,7 @@ package com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail
 import android.os.Bundle
 import android.util.Log
 import android.widget.Spinner
+import com.allyants.chipview.SimpleChipAdapter
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.presentation.base.AdapterDto
@@ -12,8 +13,12 @@ import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LESSON_DE
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LESSON_DETAIL_VIEW_TYPE
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonDetailViewType
 import kotlinx.android.synthetic.main.frag_lesson_detail.*
+import java.util.ArrayList
 
 class LessonDetailFragment : BaseVmFragment<LessonDetailVm>() {
+
+    private lateinit var teachersChipAdapter: TeachersChipAdapter
+
     override val layoutId: Int = R.layout.frag_lesson_detail
 
     override fun getVmClass(): Class<LessonDetailVm> =
@@ -43,6 +48,8 @@ class LessonDetailFragment : BaseVmFragment<LessonDetailVm>() {
             { groupFullModel -> groupFullModel.id },
             { itemId, position -> vm.groupSelectedAction.accept(Pair(itemId,position))}
         )
+        teachersChipAdapter = TeachersChipAdapter()
+        frag_lesson_detail_teachers_chips.setAdapter(teachersChipAdapter)
     }
 
     override fun createVmBinds() {
@@ -61,6 +68,9 @@ class LessonDetailFragment : BaseVmFragment<LessonDetailVm>() {
                 }
                 frag_lesson_detail_group_sp.setSelection(adapterDto.selectedPosition)
                 closeSpinner(frag_lesson_detail_group_sp)
+            },
+            vm.teachersChipRelay.subscribe {
+                teachersChipAdapter.teachersChipList = it
             }
         )
     }

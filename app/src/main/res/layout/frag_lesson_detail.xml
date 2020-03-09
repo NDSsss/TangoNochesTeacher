@@ -1,50 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/frag_lesson_detail_name_til"
-        android:layout_marginTop="@dimen/base_margin_half"
-        android:layout_marginStart="@dimen/base_margin"
-        android:layout_marginEnd="@dimen/base_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_margin"
+        android:layout_marginTop="@dimen/base_margin_half"
+        android:layout_marginEnd="@dimen/base_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/frag_lesson_detail_name_et"
-            android:hint="@string/lesson_detail_name_hint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="@string/lesson_detail_name_hint" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
-        android:text="@string/lesson_detail_group_hint"
-        android:layout_marginTop="@dimen/base_margin_half"
-        android:layout_marginStart="@dimen/base_margin"
-        android:layout_marginEnd="@dimen/base_margin"
-        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_name_til"
         android:id="@+id/frag_lesson_detail_group_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_margin"
+        android:layout_marginTop="@dimen/base_margin_half"
+        android:layout_marginEnd="@dimen/base_margin"
+        android:text="@string/lesson_detail_group_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_name_til" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:popupBackground="@color/colorPrimary"
         android:id="@+id/frag_lesson_detail_group_sp"
-        android:spinnerMode="dropdown"
-        android:prompt="@string/lesson_detail_group_hint"
-        android:layout_marginTop="@dimen/base_margin_half"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/base_margin"
+        android:layout_marginTop="@dimen/base_margin_half"
         android:layout_marginEnd="@dimen/base_margin"
-        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_group_header"
+        android:popupBackground="@color/colorPrimary"
+        android:prompt="@string/lesson_detail_group_hint"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_group_header" />
+
+    <com.allyants.chipview.ChipView
+        android:visibility="gone"
+        android:id="@+id/frag_lesson_detail_teachers_chips"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_group_sp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

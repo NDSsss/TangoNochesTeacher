@@ -5,7 +5,6 @@ import com.jakewharton.rxrelay2.PublishRelay
 import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.data.models.LessonFullModel
 import com.tangonoches.teacher.data.models.StudentShortModel
-import com.tangonoches.teacher.data.models.TeacherShortModel
 import com.tangonoches.teacher.domain.interactors.ILessonsInteractor
 import com.tangonoches.teacher.presentation.base.AdapterDto
 import com.tangonoches.teacher.presentation.base.BaseVm
@@ -27,42 +26,48 @@ class LessonDetailVm @Inject constructor(
     val groupsRelay = BehaviorRelay.createDefault<List<GroupFullModel>>(listOf())
     val groupSelectedAction = PublishRelay.create<Pair<Long, Int>>()
 
-    val teachersRelay = BehaviorRelay.create<List<TeacherShortModel>>()
+    val teachersChipRelay = BehaviorRelay.create<List<TeacherChipModel>>()
     val studentsRelay = BehaviorRelay.create<List<StudentShortModel>>()
 
     override fun createBinds() {
         super.createBinds()
         binds.addAll(
             viewCreatedAction.subscribe {
-                lessonsInteractor.getGroups()
+                if (argViewType.hasValue()) {
+                    when (argViewType.value) {
+                        EDIT -> lessonsInteractor.getLessonById(
+                            argLessonId.value
+                                ?: throw IllegalArgumentException("lesson id must be initialized")
+                        )
+                        else -> Single.just(LessonFullModel())
+                    }
+                } else {
+                    Single.just(LessonFullModel())
+                }
+                    .flatMap { lesson ->
+                        lessonNameRelay.accept(lesson.name)
+                        lessonRelay.accept(lesson)
+                        lessonsInteractor.getGroups()
+                    }
+
                     .flatMap { groups ->
                         groupsRelay.accept(groups)
                         lessonsInteractor.getTeachers()
                     }
                     .flatMap { teachers ->
-                        teachersRelay.accept(teachers)
+                        teachersChipRelay.accept(teachers.map { teacher ->
+                            teacher.toChipModel(
+                                lessonRelay.value?.teachers?.contains(teacher.id) ?: false
+                            )
+                        })
                         lessonsInteractor.getStudents()
                     }
-                    .flatMap { students ->
+                    .subscribe { students ->
                         studentsRelay.accept(students)
-                        if (argViewType.hasValue()) {
-                            when (argViewType.value) {
-                                EDIT -> lessonsInteractor.getLessonById(
-                                    argLessonId.value
-                                        ?: throw IllegalArgumentException("lesson id must be initialized")
-                                )
-                                else -> Single.just(LessonFullModel())
-                            }
-                        } else {
-                            Single.just(LessonFullModel())
-                        }
-                    }.subscribe { lesson ->
-                        lessonRelay.accept(lesson)
                     }
             },
-            lessonRelay.subscribe { lesson ->
-                lessonNameRelay.accept(lesson.name)
-                grpupsForAdapter.accept(AdapterDto(groupsRelay.value!!, lesson.groupId))
+            groupsRelay.subscribe { groups ->
+                grpupsForAdapter.accept(AdapterDto(groups, lessonRelay.value?.groupId ?: -1L))
             },
             groupSelectedAction.subscribe { pair ->
                 grpupsForAdapter.accept(
