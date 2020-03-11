@@ -15,16 +15,25 @@ import java.util.ArrayList;
 
 public class SimpleChipAdapter extends ChipAdapter{
 
-    ArrayList<Object>search_data = new ArrayList<>();
-    ArrayList<Object>chips = new ArrayList<>();
+    ArrayList<BaseChipItem>search_data = new ArrayList<>();
+    ArrayList<BaseChipItem>chips = new ArrayList<>();
 
-    public SimpleChipAdapter(ArrayList<Object>search_data){
+    public SimpleChipAdapter(ArrayList<BaseChipItem>search_data){
         this.search_data = search_data;
         this.data = search_data;
     }
 
+    public ArrayList<BaseChipItem> getChips() {
+        return chips;
+    }
+
+    public void setChips(ArrayList<BaseChipItem> chips) {
+        this.chips = chips;
+        refresh();
+    }
+
     @Override
-    public Object getItem(int pos) {
+    public BaseChipItem getItem(int pos) {
         return search_data.get(pos);
     }
 
@@ -41,7 +50,7 @@ public class SimpleChipAdapter extends ChipAdapter{
     public View createSearchView(Context context, boolean is_checked, final int pos) {
         View view = View.inflate(context,R.layout.search,null);
         CheckBox cbCheck = view.findViewById(R.id.cbCheck);
-        cbCheck.setText((String)search_data.get(pos));
+        cbCheck.setText(search_data.get(pos).toString());
         cbCheck.setChecked(is_checked);
         cbCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -62,7 +71,7 @@ public class SimpleChipAdapter extends ChipAdapter{
     public View createChip(Context context, final int pos) {
         View view = View.inflate(context,R.layout.chip,null);
         TextView tvChip = view.findViewById(R.id.tvChip);
-        tvChip.setText((String)search_data.get(pos));
+        tvChip.setText(search_data.get(pos).toString());
         ImageView ivClose = view.findViewById(R.id.ivClose);
         ivClose.setOnClickListener(new View.OnClickListener() {
             @Override

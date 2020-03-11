@@ -15,9 +15,11 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
+            android:windowSoftInputMode="adjustResize"
             android:name=".presentation.main.MainDrawerActivity"
             android:label="@string/title_activity_main_drawer"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".presentation.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

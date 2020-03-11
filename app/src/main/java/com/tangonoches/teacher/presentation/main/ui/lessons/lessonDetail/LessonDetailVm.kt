@@ -5,17 +5,35 @@ import com.jakewharton.rxrelay2.PublishRelay
 import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.data.models.LessonFullModel
 import com.tangonoches.teacher.data.models.StudentShortModel
+import com.tangonoches.teacher.data.models.TeacherShortModel
+import com.tangonoches.teacher.domain.editors.lesson.ILessonEditor
 import com.tangonoches.teacher.domain.interactors.ILessonsInteractor
 import com.tangonoches.teacher.presentation.base.AdapterDto
 import com.tangonoches.teacher.presentation.base.BaseVm
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonDetailViewType
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonDetailViewType.EDIT
+import com.tangonoches.teacher.presentation.view.chips.StudentsChipsVm
+import com.tangonoches.teacher.presentation.view.chips.TeacherChipsVm
 import io.reactivex.Single
 import javax.inject.Inject
 
 class LessonDetailVm @Inject constructor(
-    private val lessonsInteractor: ILessonsInteractor
+    private val lessonsInteractor: ILessonsInteractor,
+    private val lessonEitor: ILessonEditor
 ) : BaseVm() {
+
+//    lateinit var teachersChipsWidgetVm: TeacherChipsVm
+//    fun settTeachersChipsWidgetVm(teachersChipsWidgetVm: TeacherChipsVm) {
+//        this.teachersChipsWidgetVm = teachersChipsWidgetVm
+//        this.teachersChipsWidgetVm.itemsObservable = studentsChipRelay.map { it }
+//    }
+//
+//    lateinit var studentsChipsWidgetVm: StudentsChipsVm
+//    fun settStudentsChipsWidgetVm(studentsChipsWidgetVm: StudentsChipsVm) {
+//        this.studentsChipsWidgetVm = studentsChipsWidgetVm
+//        this.studentsChipsWidgetVm.itemsObservable = studentsChipRelay.map { it }
+//    }
+
     val argLessonId = BehaviorRelay.create<Long>()
     val argViewType = BehaviorRelay.create<LessonDetailViewType>()
 
@@ -26,8 +44,8 @@ class LessonDetailVm @Inject constructor(
     val groupsRelay = BehaviorRelay.createDefault<List<GroupFullModel>>(listOf())
     val groupSelectedAction = PublishRelay.create<Pair<Long, Int>>()
 
-    val teachersChipRelay = BehaviorRelay.create<List<TeacherChipModel>>()
-    val studentsRelay = BehaviorRelay.create<List<StudentShortModel>>()
+//    val teachersChipRelay = BehaviorRelay.create<List<TeacherShortModel>>()
+//    val studentsChipRelay = BehaviorRelay.create<List<StudentShortModel>>()
 
     override fun createBinds() {
         super.createBinds()
@@ -45,26 +63,35 @@ class LessonDetailVm @Inject constructor(
                     Single.just(LessonFullModel())
                 }
                     .flatMap { lesson ->
+                        lessonEitor.setLessonToEdit(lesson)
                         lessonNameRelay.accept(lesson.name)
                         lessonRelay.accept(lesson)
                         lessonsInteractor.getGroups()
+                    }.subscribe { groups ->
+                        groupsRelay.accept(groups)
                     }
 
-                    .flatMap { groups ->
-                        groupsRelay.accept(groups)
-                        lessonsInteractor.getTeachers()
-                    }
-                    .flatMap { teachers ->
-                        teachersChipRelay.accept(teachers.map { teacher ->
-                            teacher.toChipModel(
-                                lessonRelay.value?.teachers?.contains(teacher.id) ?: false
-                            )
-                        })
-                        lessonsInteractor.getStudents()
-                    }
-                    .subscribe { students ->
-                        studentsRelay.accept(students)
-                    }
+//                    .flatMap { groups ->
+//                        groupsRelay.accept(groups)
+//                        lessonsInteractor.getTeachers()
+//                    }
+//                    .flatMap { teachers ->
+//                        teachersChipRelay.accept(teachers.map { teacher ->
+//                            teacher.setIsSelected(
+//                                lessonRelay.value?.teachers?.contains(teacher.id) ?: false
+//                            )
+//                            teacher
+//                        })
+//                        lessonsInteractor.getStudents()
+//                    }
+//                    .subscribe { students ->
+//                        studentsChipRelay.accept(students.map { student ->
+//                            student.setIsSelected(
+//                                lessonRelay.value?.students?.contains(student.id) ?: false
+//                            )
+//                            student
+//                        })
+//                    }
             },
             groupsRelay.subscribe { groups ->
                 grpupsForAdapter.accept(AdapterDto(groups, lessonRelay.value?.groupId ?: -1L))

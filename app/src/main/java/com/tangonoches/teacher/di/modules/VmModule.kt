@@ -8,6 +8,8 @@ import com.tangonoches.teacher.presentation.login.LoginVm
 import com.tangonoches.teacher.presentation.main.MainDrawerVm
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonsVm
 import com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail.LessonDetailVm
+import com.tangonoches.teacher.presentation.view.chips.StudentsChipsVm
+import com.tangonoches.teacher.presentation.view.chips.TeacherChipsVm
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -35,6 +37,16 @@ interface VmModule {
     @IntoMap
     @VmKeyName(LessonDetailVm::class)
     fun bindLessonDetailVmVm(viewModel: LessonDetailVm): ViewModel
+
+    @Binds
+    @IntoMap
+    @VmKeyName(TeacherChipsVm::class)
+    fun bindTeacherChipsVm(viewModel: TeacherChipsVm): ViewModel
+
+    @Binds
+    @IntoMap
+    @VmKeyName(StudentsChipsVm::class)
+    fun bindStudentsChipsVm(viewModel: StudentsChipsVm): ViewModel
 
     @Binds
     @Singleton

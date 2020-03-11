@@ -53,6 +53,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.2.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
+    implementation("com.google.android:flexbox:1.1.0")
 //    implementation("com.github.jakebonk:ChipView:1.0.1")
 
     (ext["baseAndroidDependencies"] as List<String>)

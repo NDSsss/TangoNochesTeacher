@@ -13,8 +13,8 @@ public abstract class ChipAdapter {
 
     private ChipView chipView;
 
-    public ArrayList<Object> data = new ArrayList<>();
-    public abstract Object getItem(int pos);
+    public ArrayList<BaseChipItem> data = new ArrayList<>();
+    public abstract BaseChipItem getItem(int pos);
     public abstract boolean isSelected(int pos);
 
     public abstract View createSearchView(Context context,boolean is_checked,int pos);

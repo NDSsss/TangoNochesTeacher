@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ChipView</string>
+    <string name="btn_list_visibility">Показать/Скрыть список</string>
 </resources>

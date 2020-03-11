@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class SimpleSearchAdapter extends ArrayAdapter<String>{
 
     private ChipAdapter adapter;
-    private ArrayList<Object> data = new ArrayList<>();
+    private ArrayList<BaseChipItem> data = new ArrayList<>();
 
     public SimpleSearchAdapter(Context context,ChipAdapter adapter){
         super(context,-1);
@@ -51,7 +51,7 @@ public class SimpleSearchAdapter extends ArrayAdapter<String>{
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                data = (ArrayList<Object>)filterResults.values;
+                data = (ArrayList<BaseChipItem>)filterResults.values;
                 notifyDataSetChanged();
             }
         };

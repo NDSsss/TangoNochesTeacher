@@ -16,6 +16,7 @@ import javax.inject.Singleton
         RepositoriesModule::class,
         ServicesModule::class,
         InteractorsModule::class,
+        EditorsModule::class,
         VmModule::class
     ]
 )
