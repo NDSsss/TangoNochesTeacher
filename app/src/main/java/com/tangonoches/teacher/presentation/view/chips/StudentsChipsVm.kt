@@ -11,9 +11,7 @@ class StudentsChipsVm @Inject constructor(
         super.onFirstStart()
         binds.addAll(
             lessonEditor.getCurrentLessonStudentsObservable().subscribe { list ->
-                chipsState.accept(list)
-            },
-            lessonEditor.getAllStudentsObservable().subscribe { list ->
+                chipsState.accept(list.filter { it.isSelected })
                 itemsState.accept(list)
             }
         )
