@@ -1,6 +1,7 @@
 package com.tangonoches.teacher.domain.datasources.web.login
 
 import com.tangonoches.teacher.domain.services.LoginService
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,5 +16,10 @@ class LoginDataSource(
 }
 
 fun <T : Any> Single<T>.subToThreads(): Single<T> = this
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+
+
+fun Completable.subToThreads(): Completable = this
     .subscribeOn(Schedulers.io())
     .observeOn(AndroidSchedulers.mainThread())

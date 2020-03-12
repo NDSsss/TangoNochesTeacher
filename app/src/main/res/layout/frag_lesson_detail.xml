@@ -1,70 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/frag_lesson_detail_name_til"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/base_margin"
-        android:layout_marginTop="@dimen/base_margin_half"
-        android:layout_marginEnd="@dimen/base_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/frag_lesson_detail_name_et"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/frag_lesson_detail_name_til"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frag_lesson_detail_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lesson_detail_name_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/frag_lesson_detail_group_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:text="@string/lesson_detail_group_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_name_til" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/frag_lesson_detail_group_sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:popupBackground="@color/colorPrimary"
+            android:prompt="@string/lesson_detail_group_hint"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_group_header" />
+
+        <com.tangonoches.teacher.presentation.view.chips.BaseCipsWidget
+            android:id="@+id/frag_lesson_detail_teachers_chips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lesson_detail_name_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_group_sp" />
 
-    <TextView
-        android:id="@+id/frag_lesson_detail_group_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/base_margin"
-        android:layout_marginTop="@dimen/base_margin_half"
-        android:layout_marginEnd="@dimen/base_margin"
-        android:text="@string/lesson_detail_group_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_name_til" />
+        <com.tangonoches.teacher.presentation.view.chips.BaseCipsWidget
+            android:id="@+id/frag_lesson_detail_students_chips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_teachers_chips" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/frag_lesson_detail_group_sp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/base_margin"
-        android:layout_marginTop="@dimen/base_margin_half"
-        android:layout_marginEnd="@dimen/base_margin"
-        android:popupBackground="@color/colorPrimary"
-        android:prompt="@string/lesson_detail_group_hint"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_group_header" />
-    <com.tangonoches.teacher.presentation.view.chips.BaseCipsWidget
-        android:id="@+id/frag_lesson_detail_teachers_chips"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_group_sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.tangonoches.teacher.presentation.view.chips.BaseCipsWidget
-        android:id="@+id/frag_lesson_detail_students_chips"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_teachers_chips"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/frag_lesson_detail_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:paddingBottom="@dimen/base_margin_half"
+            android:text="@string/lesson_detail_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_lesson_detail_students_chips" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

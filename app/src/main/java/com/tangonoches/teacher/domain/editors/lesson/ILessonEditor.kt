@@ -4,18 +4,19 @@ import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.data.models.LessonFullModel
 import com.tangonoches.teacher.data.models.StudentShortModel
 import com.tangonoches.teacher.data.models.TeacherShortModel
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 interface ILessonEditor {
     fun setLessonToEdit(lesson: LessonFullModel)
 
-    fun addTeacher(teacher: TeacherShortModel)
-    fun removeTeacher(teacher: TeacherShortModel)
+    fun addTeacher(teacherId: Long)
+    fun removeTeacher(teacherId: Long)
 
-    fun addStudent(student: StudentShortModel)
-    fun removeStudent(student: StudentShortModel)
+    fun addStudent(studentId: Long)
+    fun removeStudent(studentId: Long)
 
-    fun setGroup(group: GroupFullModel)
+    fun groupSelected(groupId: Long)
 
     fun setName(name: String)
 
@@ -24,4 +25,8 @@ interface ILessonEditor {
 
     fun getCurrentLessonTeachersObservable(): Observable<List<TeacherShortModel>>
     fun getCurrentLessonStudentsObservable(): Observable<List<StudentShortModel>>
+    fun getCurrentLessonGroupObservable(): Observable<List<GroupFullModel>>
+
+    fun saveLesson(): Completable
+    fun clearAll()
 }

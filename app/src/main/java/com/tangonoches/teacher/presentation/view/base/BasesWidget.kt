@@ -2,6 +2,7 @@ package com.tangonoches.teacher.presentation.view.base
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.FrameLayout
 import io.reactivex.disposables.CompositeDisposable
 
@@ -22,6 +23,7 @@ abstract class BasesWidget<VM : BaseWidgetVm> @JvmOverloads constructor(
     protected open fun injects() {}
 
     open fun initVm(vm: VM, firstStart: Boolean) {
+        Log.d("lifecycle", "${this::class.java.simpleName} initVm isFirstStart $firstStart")
         injects()
         this.vm = vm
         this.firstStart = firstStart
@@ -36,6 +38,7 @@ abstract class BasesWidget<VM : BaseWidgetVm> @JvmOverloads constructor(
     }
 
     override fun onDetachedFromWindow() {
+        Log.d("lifecycle", "${this::class.java.simpleName} onDetachedFromWindow")
         super.onDetachedFromWindow()
         rxBinds.clear()
     }

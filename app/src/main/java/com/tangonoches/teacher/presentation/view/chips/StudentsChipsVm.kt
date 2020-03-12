@@ -6,7 +6,9 @@ import javax.inject.Inject
 class StudentsChipsVm @Inject constructor(
     private val lessonEditor: ILessonEditor
 ) : BaseChipsWidgetVm() {
-    init {
+
+    override fun onFirstStart() {
+        super.onFirstStart()
         binds.addAll(
             lessonEditor.getCurrentLessonStudentsObservable().subscribe { list ->
                 chipsState.accept(list)
@@ -15,5 +17,13 @@ class StudentsChipsVm @Inject constructor(
                 itemsState.accept(list)
             }
         )
+    }
+
+    override fun addItem(dto: ItemSelectedDto) {
+        lessonEditor.addStudent(dto.id)
+    }
+
+    override fun removeItem(dto: ItemSelectedDto) {
+        lessonEditor.removeStudent(dto.id)
     }
 }

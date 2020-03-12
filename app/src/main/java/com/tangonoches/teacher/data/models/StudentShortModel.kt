@@ -1,22 +1,19 @@
 package com.tangonoches.teacher.data.models
 
-import com.allyants.chipview.BaseChipItem
+import com.tangonoches.teacher.presentation.view.chips.BaseChipItem
 
 data class StudentShortModel(
     val barcodeId: Long = 0,
-    private val id: Long = 0,
-    private var isSelected: Boolean = false,
+    override val id: Long = 0,
+    override val isSelected: Boolean = false,
     val name: String = "",
     val phone: String = ""
 ) : BaseChipItem {
-    override fun isSelected(): Boolean = isSelected
-    override fun setIsSelected(isSelected: Boolean){
-        this.isSelected = isSelected
-    }
 
-    override fun getId(): Long = id
+    fun setIsSelected(isSelected: Boolean): StudentShortModel =
+        this.copy(isSelected = isSelected)
+
     override fun toString(): String = name
-
 
 }
 

@@ -5,8 +5,9 @@ import com.tangonoches.teacher.domain.repositories.groups.IGroupsRepository
 import com.tangonoches.teacher.domain.repositories.lessons.ILessonsRepository
 import com.tangonoches.teacher.domain.repositories.students.IStudentsRepository
 import com.tangonoches.teacher.domain.repositories.teachers.ITeachersRepository
+import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 
 class LessonsInteractor(
     private val lessonsRepository: ILessonsRepository,
@@ -14,13 +15,11 @@ class LessonsInteractor(
     private val teachersRepository: ITeachersRepository,
     private val studentsRepository: IStudentsRepository
 ) : ILessonsInteractor {
-    override fun getFirstLessonsPageWithGroups(): Single<Pair<List<GroupFullModel>, List<LessonShortModel>>> =
-//    lessonsRepository.getAllLessons(0).map { Pair(listOf<GroupFullModel>(),it) }
-        Single.zip(
-            groupsRepository.getAllGroups(),
-            lessonsRepository.getAllLessons(1),
-            BiFunction { t1, t2 -> Pair(t1, t2) }
-        )
+
+    override fun refreshLessons(): Completable = lessonsRepository.refreshLessons()
+
+    override fun lessonsRefreshObservable(): Observable<List<LessonShortModel>> =
+        lessonsRepository.refreshLessonsObservable()
 
     override fun getLessonsPage(page: Int): Single<List<LessonShortModel>> =
         lessonsRepository.getAllLessons(page)
@@ -37,4 +36,9 @@ class LessonsInteractor(
     override fun getStudents(): Single<List<StudentShortModel>> =
         studentsRepository.getAllStudents()
 
+    override fun updateLesson(lesson: LessonFullModel): Completable =
+        lessonsRepository.updateLesson(lesson)
+
+    override fun createLesson(lesson: LessonFullModel): Completable =
+        lessonsRepository.createLesson(lesson)
 }

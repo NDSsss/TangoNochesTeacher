@@ -1,6 +1,5 @@
 package com.tangonoches.teacher.presentation.main.ui.lessons.allLessons
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ class LessonsAdapter(
 
     private var lessons = listOf<LessonShortModel>()
     private var groups = listOf<GroupFullModel>()
-//    private var groups = listOf<Group>()
 
     private var hasMoreLessons = false
 
@@ -61,11 +59,9 @@ class LessonShortVh(itemView: View) : RecyclerView.ViewHolder(itemView) {
         group: GroupFullModel?,
         detailListener: (lessonId: Long) -> Unit
     ) {
-        Log.d("APP_TAG", "LessonShortVh bind $lessonShort")
         itemView.item_lesson_short_name_tv.text = lessonShort.name
         itemView.item_lesson_short_date_tv.text = lessonShort.lessonDate
         itemView.item_lesson_short_detail_iv.setOnClickListener {
-            Log.d("APP_TAG", "LessonShortVh setOnClickListener ${lessonShort.id}")
             detailListener(lessonShort.id)
         }
         group?.let { itemView.item_lesson_short_group_tv.text = it.name }

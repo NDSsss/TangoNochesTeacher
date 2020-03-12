@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.allyants.chipview.BaseChipItem
 import com.tangonoches.teacher.R
 import kotlinx.android.synthetic.main.item_chip_list_item.view.*
 
-class BaseChipsWidgetItemsAdapter : RecyclerView.Adapter<ChipItemVh>() {
+class BaseChipsWidgetItemsAdapter(
+    private val itemSelectedListener: (ItemSelectedDto) -> Unit
+) : RecyclerView.Adapter<ChipItemVh>() {
 
     var items: List<BaseChipItem> = listOf()
         set(value) {
@@ -22,14 +23,22 @@ class BaseChipsWidgetItemsAdapter : RecyclerView.Adapter<ChipItemVh>() {
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ChipItemVh, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], itemSelectedListener)
     }
 }
 
 class ChipItemVh(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(item: BaseChipItem) {
+    fun bind(
+        item: BaseChipItem,
+        itemSelectedListener: (ItemSelectedDto) -> Unit
+    ) {
         itemView.item_chip_list_item_cb.setText(item.toString())
+        itemView.item_chip_list_item_cb.setOnCheckedChangeListener(null)
         itemView.item_chip_list_item_cb.isChecked = item.isSelected
-        itemView.item_chip_list_item_cb.setOnCheckedChangeListener { buttonView, isChecked -> }
+        itemView.item_chip_list_item_cb.setOnCheckedChangeListener { buttonView, isChecked ->
+            itemSelectedListener(
+                ItemSelectedDto(item.id, isChecked)
+            )
+        }
     }
 }

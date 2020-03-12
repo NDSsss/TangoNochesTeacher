@@ -22,6 +22,8 @@ class LessonsVm @Inject constructor(
     val lessonsLeftEffect = PublishRelay.create<Boolean>()
     var currentPage = 1
 
+    val lessonsRefreshAction = PublishRelay.create<Unit>()
+
     val requestLessonsAction = PublishRelay.create<Unit>()
     val requestNextPageAction = PublishRelay.create<Unit>()
 
@@ -32,13 +34,16 @@ class LessonsVm @Inject constructor(
                 .filter { groupsValue.hasValue().not() }
                 .subscribe {
                     currentPage = 1
-                    lessonsInteractor.getFirstLessonsPageWithGroups()
-                        .subscribe { pair ->
-                            groupsValue.accept(pair.first)
+                    lessonsInteractor.getGroups().flatMap { groups ->
+                        groupsValue.accept(groups)
+                        lessonsInteractor.getLessonsPage(currentPage)
+                    }
+                        .subLoading()
+                        .subscribe { lessons ->
                             currentPage++
-                            if (pair.second.isNotEmpty()) {
+                            if (lessons.isNotEmpty()) {
                                 lessonsLeftEffect.accept(true)
-                                allLessonsValue.accept(allLessonsValue.value!!.plus(pair.second))
+                                allLessonsValue.accept(lessons)
                             } else {
                                 lessonsLeftEffect.accept(false)
                             }
@@ -46,6 +51,7 @@ class LessonsVm @Inject constructor(
                 },
             requestNextPageAction.subscribe {
                 lessonsInteractor.getLessonsPage(currentPage)
+                    .subLoading()
                     .subscribe { newLessons ->
                         currentPage++
                         if (newLessons.isNotEmpty()) {
@@ -55,6 +61,18 @@ class LessonsVm @Inject constructor(
                             lessonsLeftEffect.accept(false)
                         }
                     }
+            },
+            lessonsInteractor.lessonsRefreshObservable().subscribe { refresherLessons ->
+                currentPage = 2
+                lessonsLeftEffect.accept(true)
+                allLessonsValue.accept(refresherLessons)
+            },
+            lessonsRefreshAction.subscribe {
+                binds.add(
+                    lessonsInteractor.refreshLessons()
+                        .subLoading()
+                        .subscribe()
+                )
             }
         )
     }

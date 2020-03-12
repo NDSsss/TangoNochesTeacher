@@ -30,4 +30,8 @@
 
     <string name="lesson_detail_name_hint">Название урока</string>
     <string name="lesson_detail_group_hint">Группа</string>
+    <string name="lesson_detail_save">Сохранить</string>
+
+    <string name="scan_students_title">Добавление ученика</string>
+    <string name="scan_students_confirm">Готово</string>
 </resources>

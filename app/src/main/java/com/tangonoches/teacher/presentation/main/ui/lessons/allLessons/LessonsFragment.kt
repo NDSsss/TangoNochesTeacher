@@ -36,6 +36,7 @@ class LessonsFragment : BaseVmFragment<LessonsVm>() {
                 )
         }
         vm.requestLessonsAction.accept(Unit)
+        frag_lessons_swipe.setOnRefreshListener { vm.lessonsRefreshAction.accept(Unit) }
     }
 
     override fun createVmBinds() {
@@ -55,6 +56,9 @@ class LessonsFragment : BaseVmFragment<LessonsVm>() {
                 (frag_lessons_rv.adapter as? LessonsAdapter).let {
                     it?.addGroups(newGroups)
                 }
+            },
+            vm.loadingState.subscribe {
+                frag_lessons_swipe.isRefreshing = it
             }
         )
     }
@@ -90,5 +94,6 @@ class LessonsFragment : BaseVmFragment<LessonsVm>() {
 
 enum class LessonDetailViewType {
     ADD,
-    EDIT
+    EDIT,
+    EMPTY
 }
