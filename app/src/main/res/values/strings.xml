@@ -34,4 +34,18 @@
 
     <string name="scan_students_title">Добавление ученика</string>
     <string name="scan_students_confirm">Готово</string>
+
+    <string name="btn_list_visibility">Показать\Скрыть список</string>
+
+    <string name="menu_students_all_title">Ученики</string>
+
+    <string name="student_detail_title">Редактирование ученика</string>
+    <string name="student_detail_hint_name">Имя</string>
+    <string name="student_detail_hint_phone">Телефон</string>
+    <string name="student_detail_hint_vk">Старинца ВК</string>
+    <string name="student_detail_hint_facebook">Страница фейсбук</string>
+    <string name="student_detail_hint_instagram">Страница инстаграмм</string>
+    <string name="student_detail_hint_extra_info">Дополнительная информация</string>
+    <string name="student_detail_hint_barcode_id">Номер клубной карты</string>
+    <string name="student_detail_save_btn">Сохранить</string>
 </resources>

@@ -2,6 +2,8 @@ package com.tangonoches.teacher.di.modules
 
 import com.tangonoches.teacher.domain.interactors.ILessonsInteractor
 import com.tangonoches.teacher.domain.interactors.LessonsInteractor
+import com.tangonoches.teacher.domain.interactors.students.IStudentsInteractor
+import com.tangonoches.teacher.domain.interactors.students.StudentsInteractor
 import com.tangonoches.teacher.domain.repositories.groups.IGroupsRepository
 import com.tangonoches.teacher.domain.repositories.lessons.ILessonsRepository
 import com.tangonoches.teacher.domain.repositories.students.IStudentsRepository
@@ -24,6 +26,15 @@ class InteractorsModule {
             lessonsRepository,
             groupsRepository,
             teachersRepository,
+            studentsRepository
+        )
+
+    @Provides
+    @Singleton
+    fun provideStudentsInteractor(
+        studentsRepository: IStudentsRepository
+    ): IStudentsInteractor =
+        StudentsInteractor(
             studentsRepository
         )
 }

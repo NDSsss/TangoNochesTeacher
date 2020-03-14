@@ -1,5 +1,6 @@
 package com.tangonoches.teacher.di.modules
 
+import com.google.gson.Gson
 import com.tangonoches.teacher.domain.datasources.web.groups.GroupsDataSource
 import com.tangonoches.teacher.domain.datasources.web.groups.IGroupsDataSource
 import com.tangonoches.teacher.domain.datasources.web.lessons.ILessonsDataSource
@@ -55,8 +56,9 @@ class WebDataSourcesModule {
     @Provides
     @Singleton
     fun provideStudentsDataSource(
-        service: StudentsService
-    ): IStudentsDataSource = StudentsDataSource(service)
+        service: StudentsService,
+        gson: Gson
+    ): IStudentsDataSource = StudentsDataSource(service, gson)
 
     @Provides
     @Singleton

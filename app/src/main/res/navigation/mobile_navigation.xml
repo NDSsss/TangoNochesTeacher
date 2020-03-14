@@ -18,6 +18,18 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
+        android:id="@+id/nav_students_all"
+        android:name="com.tangonoches.teacher.presentation.main.ui.student.allStudents.StudentsAllFragment"
+        android:label="@string/menu_students_all_title"
+        tools:layout="@layout/frag_students_all"/>
+
+    <fragment
+        android:id="@+id/nav_student_detail"
+        android:name="com.tangonoches.teacher.presentation.main.ui.student.studentDetail.StudentDetailFragment"
+        android:label="@string/menu_students_all_title"
+        tools:layout="@layout/frag_students_all"/>
+
+    <fragment
         android:id="@+id/nav_student_scan"
         android:name="com.tangonoches.teacher.presentation.main.ui.lessons.scanStudent.ScanStudentsFragment"
         android:label="@string/scan_students_title"

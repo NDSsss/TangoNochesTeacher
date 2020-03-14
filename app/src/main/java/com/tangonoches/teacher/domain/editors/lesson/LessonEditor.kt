@@ -4,6 +4,7 @@ import android.util.Log
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import com.tangonoches.teacher.data.models.*
+import com.tangonoches.teacher.domain.repositories.constants.DEFAULT_ID
 import com.tangonoches.teacher.domain.repositories.groups.IGroupsRepository
 import com.tangonoches.teacher.domain.repositories.lessons.ILessonsRepository
 import com.tangonoches.teacher.domain.repositories.students.IStudentsRepository
@@ -187,7 +188,7 @@ class LessonEditor(
             students = currentStudents
         )
 
-        return if (newLesson.id == DEFAULT_LESSON_ID) {
+        return if (newLesson.id == DEFAULT_ID) {
             lessonsRepository.createLesson(newLesson)
         } else {
             lessonsRepository.updateLesson(newLesson)

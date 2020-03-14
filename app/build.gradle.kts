@@ -46,8 +46,6 @@ dependencies {
 
     implementation(ext["kotlin-stdlib"] as String)
 
-    implementation(project(":chipviewtestnew"))
-
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment:2.2.1")
     implementation("androidx.navigation:navigation-ui:2.2.1")

@@ -3,7 +3,6 @@ package com.tangonoches.teacher.presentation.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -18,9 +17,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.presentation.base.BaseVmActivity
-import kotlinx.android.synthetic.main.activity_main_drawer.*
-import kotlinx.android.synthetic.main.nav_header_main_drawer.*
-import kotlinx.android.synthetic.main.nav_header_main_drawer.view.*
 
 class MainDrawerActivity : BaseVmActivity<MainDrawerVm>() {
     override val layoutId: Int = R.layout.activity_main_drawer
@@ -50,9 +46,9 @@ class MainDrawerActivity : BaseVmActivity<MainDrawerVm>() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_lessons_all,
-                R.id.nav_lessons_add,
                 R.id.nav_tickets_all,
-                R.id.nav_tickets_add
+                R.id.nav_tickets_add,
+                R.id.nav_students_all
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

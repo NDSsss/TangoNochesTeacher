@@ -5,6 +5,9 @@
     <item android:id="@+id/nav_lessons_all"
         android:icon="@drawable/ic_lesson_add"
         android:title="@string/menu_lessons_all"/>
+    <item android:id="@+id/nav_students_all"
+        android:icon="@drawable/ic_lesson_add"
+        android:title="@string/menu_students_all_title"/>
     <item android:id="@+id/nav_tickets_all"
         android:icon="@drawable/ic_lesson_add"
         android:title="@string/menu_tickets_all"/>

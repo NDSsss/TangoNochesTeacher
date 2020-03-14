@@ -1,2 +1,2 @@
-include ':app', ':chipviewtestnew'
+include ':app'
 rootProject.name='TangoNochesTeacher'
