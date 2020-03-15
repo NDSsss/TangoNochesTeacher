@@ -28,5 +28,6 @@ interface ILessonEditor {
     fun getCurrentLessonGroupObservable(): Observable<List<GroupFullModel>>
 
     fun saveLesson(): Completable
+    fun deleteLesson(): Completable
     fun clearAll()
 }

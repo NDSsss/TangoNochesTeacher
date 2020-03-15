@@ -1,6 +1,9 @@
 package com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Spinner
 import androidx.lifecycle.ViewModelProviders
@@ -36,6 +39,7 @@ class LessonDetailFragment : BaseVmFragment<LessonDetailVm>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         if (arguments != null) {
             arguments?.let {
                 it.getLong(LESSON_DETAIL_ID, -1L).let { id ->
@@ -49,6 +53,20 @@ class LessonDetailFragment : BaseVmFragment<LessonDetailVm>() {
             }
         } else {
             vm.argViewType.accept(LessonDetailViewType.EMPTY)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_lesson_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_lesson_detail_delete -> {
+                vm.deleteAction.accept(Unit)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

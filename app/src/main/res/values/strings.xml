@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">TangoNochesTeacher</string>
 
+    <string name="dialog_default_message">Dialog message</string>
+    <string name="dialog_default_positive_button">Positive</string>
+    <string name="dialog_default_negative_button">Negative</string>
+    <string name="dialog_default_neutral_button">Neutral</string>
+
     <string name="act_login_email_et_hint">Email</string>
     <string name="act_login_password_et_hint">Пароль</string>
     <string name="act_login_login_btn">Войти</string>
@@ -28,9 +33,14 @@
     <string name="menu_tickets_all">Все абонименты</string>
     <string name="menu_tickets_add">Добавить</string>
 
+    <string name="lesson_detail_name_title">Редактировать урок</string>
+    <string name="lesson_detail_name_menu_delete">удалить урок</string>
     <string name="lesson_detail_name_hint">Название урока</string>
     <string name="lesson_detail_group_hint">Группа</string>
     <string name="lesson_detail_save">Сохранить</string>
+    <string name="lesson_detail_delete_dialog_message">Дейсвительно удалить урок?</string>
+    <string name="lesson_detail_delete_dialog_positive">Удалить</string>
+    <string name="lesson_detail_delete_dialog_negative">Отмена</string>
 
     <string name="scan_students_title">Добавление ученика</string>
     <string name="scan_students_confirm">Готово</string>
@@ -38,8 +48,10 @@
     <string name="btn_list_visibility">Показать\Скрыть список</string>
 
     <string name="menu_students_all_title">Ученики</string>
+    <string name="menu_student_detail_title">Редактирование ученика</string>
 
     <string name="student_detail_title">Редактирование ученика</string>
+    <string name="student_detail_menu_delete">Удалить ученика</string>
     <string name="student_detail_hint_name">Имя</string>
     <string name="student_detail_hint_phone">Телефон</string>
     <string name="student_detail_hint_vk">Старинца ВК</string>
@@ -48,4 +60,7 @@
     <string name="student_detail_hint_extra_info">Дополнительная информация</string>
     <string name="student_detail_hint_barcode_id">Номер клубной карты</string>
     <string name="student_detail_save_btn">Сохранить</string>
+    <string name="student_detail_delete_dialog_message">Дейсвительно удалить ученика?</string>
+    <string name="student_detail_delete_dialog_positive">Удалить</string>
+    <string name="student_detail_delete_dialog_negative">Отмена</string>
 </resources>

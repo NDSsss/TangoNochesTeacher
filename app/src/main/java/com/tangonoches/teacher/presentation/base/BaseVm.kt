@@ -1,10 +1,13 @@
 package com.tangonoches.teacher.presentation.base
 
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
+import com.tangonoches.teacher.R
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -17,13 +20,15 @@ abstract class BaseVm : ViewModel() {
 
     protected val binds = CompositeDisposable()
 
-    val errorRelay = BehaviorRelay.create<String>()
+    val errorRelay = PublishRelay.create<String>()
 
     val closeRelay = PublishRelay.create<Unit>()
 
     val loadingState = BehaviorRelay.create<Boolean>()
 
     val showToastAction = PublishRelay.create<String>()
+
+    val showDialogAction = PublishRelay.create<ShowDialogModel>()
 
     var firstStart: Boolean = true
 
@@ -74,12 +79,29 @@ abstract class BaseVm : ViewModel() {
         closeRelay.accept(Unit)
     }
 
+    protected fun showDialog(model: ShowDialogModel) {
+        showDialogAction.accept(model)
+    }
+
+    fun <T : Any> BehaviorRelay<T>.getValueOrThrowNPE(): T =
+        this.value ?: throw NullPointerException("Relay value can not bu null")
+
     fun <T : Any> Single<T>.subLoading(): Single<T> = this
         .doOnSubscribe { startLoading() }
         .doOnSuccess { completeLoading() }
         .doOnError { showError(it) }
 
     fun <T : Any> Single<T>.subWithDefaultError(success: (T) -> Unit): Disposable =
+        this.subscribe(
+            { result ->
+                success(result)
+            },
+            {
+                showError(it)
+            }
+        )
+
+    fun <T : Any> Observable<T>.subWithDefaultError(success: (T) -> Unit): Disposable =
         this.subscribe(
             { result ->
                 success(result)
@@ -104,4 +126,14 @@ abstract class BaseVm : ViewModel() {
             }
         )
 }
+
+data class ShowDialogModel(
+    val message: Int = R.string.dialog_default_message,
+    val positiveButtonRes :Int? = null,
+    val neutralButtonRes :Int? = null,
+    val negativeButtonRes :Int? = null,
+    val positiveAction: () -> Unit = {},
+    val neutralAction: () -> Unit = {},
+    val negativeAction: () -> Unit = {}
+)
 

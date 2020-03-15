@@ -36,4 +36,8 @@ class LessonsDataSource(
     override fun createLesson(lesson: LessonFullModel): Completable =
         lessonsService.createLesson(lesson.toCreateDto())
             .subToThreads()
+
+    override fun deleteLesson(lesson: LessonFullModel): Completable =
+        lessonsService.deleteLesson(lesson.id)
+            .subToThreads()
 }

@@ -15,6 +15,8 @@ import com.tangonoches.teacher.domain.datasources.web.ticketCountTypes.ITicketCo
 import com.tangonoches.teacher.domain.datasources.web.ticketCountTypes.TicketCountTypesDataSource
 import com.tangonoches.teacher.domain.datasources.web.ticketEventTypes.ITicketEventTypesDataSource
 import com.tangonoches.teacher.domain.datasources.web.ticketEventTypes.TicketEventTypesDataSource
+import com.tangonoches.teacher.domain.datasources.web.tickets.ITicketsDataSource
+import com.tangonoches.teacher.domain.datasources.web.tickets.TicketsDataSource
 import com.tangonoches.teacher.domain.repositories.constants.IConstantsRepository
 import com.tangonoches.teacher.domain.services.*
 import dagger.Module
@@ -65,4 +67,10 @@ class WebDataSourcesModule {
     fun provideTeachersDataSource(
         service: TeachersService
     ): ITeachersDataSource = TeachersDataSource(service)
+
+    @Provides
+    @Singleton
+    fun provideTicketsDataSource(
+        service: TicketsService
+    ): ITicketsDataSource = TicketsDataSource(service)
 }

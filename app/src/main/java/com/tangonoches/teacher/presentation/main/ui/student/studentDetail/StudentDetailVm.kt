@@ -2,9 +2,11 @@ package com.tangonoches.teacher.presentation.main.ui.student.studentDetail
 
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
+import com.tangonoches.teacher.R
 import com.tangonoches.teacher.data.models.StudentFullModel
 import com.tangonoches.teacher.domain.interactors.students.IStudentsInteractor
 import com.tangonoches.teacher.presentation.base.BaseVm
+import com.tangonoches.teacher.presentation.base.ShowDialogModel
 import com.tangonoches.teacher.presentation.main.ui.student.allStudents.StudentsAllFragment
 import com.tangonoches.teacher.presentation.main.ui.student.allStudents.StudentsAllFragment.StudentDetailViewType.EDIT
 import io.reactivex.Single
@@ -28,6 +30,8 @@ class StudentDetailVm @Inject constructor(
     val instagramState = BehaviorRelay.create<String>()
 
     val saveStudentAction = PublishRelay.create<Unit>()
+    val deleteAction = PublishRelay.create<Unit>()
+    val deleteConfirmAction = PublishRelay.create<Unit>()
 
     override fun createBinds() {
         super.createBinds()
@@ -61,6 +65,23 @@ class StudentDetailVm @Inject constructor(
             },
             saveStudentAction.subscribe {
                 saveStudent()
+            },
+            deleteAction.subscribe {
+                showDialog(
+                    ShowDialogModel(
+                        message = R.string.student_detail_delete_dialog_message,
+                        negativeButtonRes = R.string.student_detail_delete_dialog_positive,
+                        negativeAction = { deleteConfirmAction.accept(Unit) },
+                        positiveButtonRes = R.string.student_detail_delete_dialog_negative
+                    )
+                )
+            },
+            deleteConfirmAction.subscribe {
+                studentsInteractor.deleteStudent(studentState.getValueOrThrowNPE())
+                    .subLoading()
+                    .subWithDefaultError {
+                        close()
+                    }
             }
         )
     }
@@ -86,7 +107,4 @@ class StudentDetailVm @Inject constructor(
         )
 
     }
-
-    fun <T : Any> BehaviorRelay<T>.getValueOrThrowNPE(): T =
-        this.value ?: throw NullPointerException("Relay value can not bu null")
 }

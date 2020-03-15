@@ -15,6 +15,6 @@ interface ILessonsRepository {
     fun getLessonById(id: Long): Single<LessonFullModel>
 
     fun updateLesson(lesson: LessonFullModel): Completable
-
     fun createLesson(lesson: LessonFullModel): Completable
+    fun deleteLesson(lesson: LessonFullModel): Completable
 }

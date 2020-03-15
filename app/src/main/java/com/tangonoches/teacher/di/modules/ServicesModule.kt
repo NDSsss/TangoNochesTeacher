@@ -44,5 +44,10 @@ class ServicesModule {
     fun providesTeachersService(retrofit: Retrofit): TeachersService =
         retrofit.create(TeachersService::class.java)
 
+    @Provides
+    @Singleton
+    fun providesTicketsService(retrofit: Retrofit): TicketsService =
+        retrofit.create(TicketsService::class.java)
+
 
 }

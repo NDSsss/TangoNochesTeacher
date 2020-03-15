@@ -6,6 +6,9 @@ import com.tangonoches.teacher.domain.datasources.web.lessons.ILessonsDataSource
 import com.tangonoches.teacher.domain.datasources.web.login.ILoginDataSource
 import com.tangonoches.teacher.domain.datasources.web.students.IStudentsDataSource
 import com.tangonoches.teacher.domain.datasources.web.teachers.ITeachersDataSource
+import com.tangonoches.teacher.domain.datasources.web.ticketCountTypes.ITicketCountTypesDataSource
+import com.tangonoches.teacher.domain.datasources.web.ticketEventTypes.ITicketEventTypesDataSource
+import com.tangonoches.teacher.domain.datasources.web.tickets.ITicketsDataSource
 import com.tangonoches.teacher.domain.repositories.constants.ConstantsRepository
 import com.tangonoches.teacher.domain.repositories.constants.IConstantsRepository
 import com.tangonoches.teacher.domain.repositories.groups.GroupsRepository
@@ -18,6 +21,12 @@ import com.tangonoches.teacher.domain.repositories.students.IStudentsRepository
 import com.tangonoches.teacher.domain.repositories.students.StudentsRepository
 import com.tangonoches.teacher.domain.repositories.teachers.ITeachersRepository
 import com.tangonoches.teacher.domain.repositories.teachers.TeachersRepository
+import com.tangonoches.teacher.domain.repositories.ticketCountTypes.ITicketCountTypesRepository
+import com.tangonoches.teacher.domain.repositories.ticketCountTypes.TicketCountTypesRepository
+import com.tangonoches.teacher.domain.repositories.ticketEventTypes.ITicketEventTypesRepository
+import com.tangonoches.teacher.domain.repositories.ticketEventTypes.TicketEventTypesRepository
+import com.tangonoches.teacher.domain.repositories.tickets.ITicketsRepository
+import com.tangonoches.teacher.domain.repositories.tickets.TicketsRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -56,4 +65,19 @@ class RepositoriesModule {
     @Singleton
     fun provideTeachersRepository(dataSource: ITeachersDataSource): ITeachersRepository =
         TeachersRepository(dataSource)
+
+    @Provides
+    @Singleton
+    fun provideTicketsRepository(dataSource: ITicketsDataSource): ITicketsRepository =
+        TicketsRepository(dataSource)
+
+    @Provides
+    @Singleton
+    fun provideTicketEventTypesRepository(dataSource: ITicketEventTypesDataSource): ITicketEventTypesRepository =
+        TicketEventTypesRepository(dataSource)
+
+    @Provides
+    @Singleton
+    fun provideTicketCountTypesRepository(dataSource: ITicketCountTypesDataSource): ITicketCountTypesRepository =
+        TicketCountTypesRepository(dataSource)
 }

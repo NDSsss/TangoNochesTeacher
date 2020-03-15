@@ -47,7 +47,6 @@ class MainDrawerActivity : BaseVmActivity<MainDrawerVm>() {
             setOf(
                 R.id.nav_lessons_all,
                 R.id.nav_tickets_all,
-                R.id.nav_tickets_add,
                 R.id.nav_students_all
             ), drawerLayout
         )

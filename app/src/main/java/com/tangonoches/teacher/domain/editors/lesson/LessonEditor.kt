@@ -3,7 +3,10 @@ package com.tangonoches.teacher.domain.editors.lesson
 import android.util.Log
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
-import com.tangonoches.teacher.data.models.*
+import com.tangonoches.teacher.data.models.GroupFullModel
+import com.tangonoches.teacher.data.models.LessonFullModel
+import com.tangonoches.teacher.data.models.StudentShortModel
+import com.tangonoches.teacher.data.models.TeacherShortModel
 import com.tangonoches.teacher.domain.repositories.constants.DEFAULT_ID
 import com.tangonoches.teacher.domain.repositories.groups.IGroupsRepository
 import com.tangonoches.teacher.domain.repositories.lessons.ILessonsRepository
@@ -194,6 +197,12 @@ class LessonEditor(
             lessonsRepository.updateLesson(newLesson)
         }
             .andThen(lessonsRepository.refreshLessons())
+    }
+
+    override fun deleteLesson(): Completable {
+        val currentLesson: LessonFullModel =
+            lesson ?: throw NullPointerException("lesson can not be null")
+        return lessonsRepository.deleteLesson(currentLesson)
     }
 
     override fun clearAll() {

@@ -4,16 +4,13 @@ import com.google.gson.Gson
 import com.tangonoches.teacher.data.models.StudentFullModel
 import com.tangonoches.teacher.data.models.StudentShortModel
 import com.tangonoches.teacher.data.responses.students.toModel
-import com.tangonoches.teacher.data.responses.students.toSaveJsonObject
 import com.tangonoches.teacher.data.responses.students.toSaveMap
 import com.tangonoches.teacher.data.responses.students.toUpdateMap
 import com.tangonoches.teacher.domain.datasources.web.login.subToThreads
 import com.tangonoches.teacher.domain.services.StudentsService
 import io.reactivex.Completable
 import io.reactivex.Single
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class StudentsDataSource(
@@ -42,5 +39,9 @@ class StudentsDataSource(
 
     override fun saveStudent(student: StudentFullModel): Completable =
         studentsService.saveStudent(gson.toJson(student.toSaveMap()).toRequestBody("application/json".toMediaTypeOrNull()))
+            .subToThreads()
+
+    override fun deleteStudent(student: StudentFullModel): Completable =
+        studentsService.deleteStudent(student.id)
             .subToThreads()
 }

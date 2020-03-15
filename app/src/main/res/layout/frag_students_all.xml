@@ -2,7 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <androidx.appcompat.widget.SearchView
+        app:iconifiedByDefault="false"
+        android:id="@+id/frag_students_all_search"
+        android:layout_marginEnd="@dimen/base_margin"
+        android:layout_marginStart="@dimen/base_margin"
+        android:layout_marginBottom="@dimen/base_margin_half"
+        android:layout_marginTop="@dimen/base_margin_half"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/frag_students_all_swrl"

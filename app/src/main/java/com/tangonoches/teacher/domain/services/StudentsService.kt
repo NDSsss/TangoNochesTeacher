@@ -28,4 +28,8 @@ interface StudentsService {
     @POST("teacher/registerStudent")
     @Headers("Content-Type: application/json")
     fun saveStudent(@Body studentSaveMap: RequestBody):Completable
+
+    @POST("teacher/deleteStudent")
+    @FormUrlEncoded
+    fun deleteStudent(@Field("id")id:Long): Completable
 }

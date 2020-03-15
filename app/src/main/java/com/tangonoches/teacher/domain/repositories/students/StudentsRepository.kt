@@ -1,11 +1,11 @@
 package com.tangonoches.teacher.domain.repositories.students
 
-import android.util.Log
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.tangonoches.teacher.data.models.StudentFullModel
 import com.tangonoches.teacher.data.models.StudentShortModel
 import com.tangonoches.teacher.domain.datasources.web.students.IStudentsDataSource
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 class StudentsRepository(
@@ -21,9 +21,8 @@ class StudentsRepository(
         } else {
             Single.just(students.value)
         }
-            .doOnSuccess { list ->
-                Log.d("APP_TAG", "StudentsRepository students $list")
-            }
+
+    override fun getAllStudentsObservable(): Observable<List<StudentShortModel>> = students
 
     override fun getStudentById(id: Long): Single<StudentFullModel> =
         studentsDataSource.getStudentById(id)
@@ -33,4 +32,14 @@ class StudentsRepository(
 
     override fun saveStudent(student: StudentFullModel): Completable =
         studentsDataSource.saveStudent(student)
+
+    override fun deleteStudent(student: StudentFullModel): Completable =
+        studentsDataSource.deleteStudent(student)
+            .andThen(refreshStudents())
+
+    override fun refreshStudents(): Completable =
+        Completable.fromSingle(
+            studentsDataSource.getAllStudents()
+                .doOnSuccess { list -> students.accept(list) }
+        )
 }

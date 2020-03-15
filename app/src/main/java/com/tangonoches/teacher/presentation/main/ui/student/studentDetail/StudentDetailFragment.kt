@@ -1,6 +1,9 @@
 package com.tangonoches.teacher.presentation.main.ui.student.studentDetail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.tangonoches.teacher.R
@@ -22,6 +25,7 @@ class StudentDetailFragment : BaseVmFragment<StudentDetailVm>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         arguments?.let { args ->
             val id = args.getLong(STUDENT_ID, DEFAULT_ID)
             if (id != DEFAULT_ID) {
@@ -37,6 +41,20 @@ class StudentDetailFragment : BaseVmFragment<StudentDetailVm>() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_student_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_student_detail_delete -> {
+                vm.deleteAction.accept(Unit)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun createVmBinds() {
         super.createVmBinds()
         vmBinds.addAll(
@@ -46,7 +64,10 @@ class StudentDetailFragment : BaseVmFragment<StudentDetailVm>() {
             frag_student_detail_phone_et.textChanges().skipInitialValue().subscribe {
                 vm.phoneState.accept(it.toString())
             },
-            frag_student_detail_barcode_id_et.textChanges().skipInitialValue().subscribe {
+            frag_student_detail_barcode_id_et.textChanges().skipInitialValue()
+                .filter {
+                    it.toString().toLongOrDefault(DEFAULT_ID) != DEFAULT_ID
+                }.subscribe {
                 vm.barcodeIdState.accept(it.toString().toLong())
             },
             frag_student_detail_extra_info_et.textChanges().skipInitialValue().subscribe {

@@ -41,4 +41,7 @@ class LessonsInteractor(
 
     override fun createLesson(lesson: LessonFullModel): Completable =
         lessonsRepository.createLesson(lesson)
+
+    override fun deleteLesson(lesson: LessonFullModel): Completable =
+        lessonsRepository.deleteLesson(lesson)
 }

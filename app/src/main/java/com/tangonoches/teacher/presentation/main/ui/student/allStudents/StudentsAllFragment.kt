@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.presentation.base.BaseVmFragment
@@ -41,12 +42,25 @@ class StudentsAllFragment : BaseVmFragment<StudentsAllVm>() {
         frag_students_all_rv.adapter = StudentsAllAdapter { openStudentDetailEdit(it) }
         vm.requestStudentsAction.accept(Unit)
         frag_students_all_swrl.setOnRefreshListener { vm.refreshStudentsAction.accept(Unit) }
+        frag_students_all_search.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                vm.searchQueryState.accept(query?:"")
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                vm.searchQueryState.accept(newText?:"")
+                return true
+            }
+
+        })
     }
 
     override fun createVmBinds() {
         super.createVmBinds()
         vmBinds.addAll(
-            vm.studentsState
+            vm.studentsFiltredState
                 .subscribe {
                     (frag_students_all_rv.adapter as? StudentsAllAdapter)?.let { adapter ->
                         adapter.students = it

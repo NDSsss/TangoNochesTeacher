@@ -1,0 +1,64 @@
+package com.tangonoches.teacher.domain.interactors.tickets
+
+import com.tangonoches.teacher.data.models.*
+import com.tangonoches.teacher.domain.repositories.students.IStudentsRepository
+import com.tangonoches.teacher.domain.repositories.teachers.ITeachersRepository
+import com.tangonoches.teacher.domain.repositories.ticketCountTypes.ITicketCountTypesRepository
+import com.tangonoches.teacher.domain.repositories.ticketEventTypes.ITicketEventTypesRepository
+import com.tangonoches.teacher.domain.repositories.tickets.ITicketsRepository
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.functions.Function5
+
+class TicketsInteractor(
+    private val ticketsRepository: ITicketsRepository,
+    private val ticketEventTypesRepository: ITicketEventTypesRepository,
+    private val ticketCountTypesRepositoryRepository: ITicketCountTypesRepository,
+    private val studentsRepository: IStudentsRepository,
+    private val teacherssRepository: ITeachersRepository
+) : ITicketsInteractor {
+    override fun getTicketsPage(page: Int): Single<List<TicketFullFilledModel>> =
+        Single.zip(
+            ticketsRepository.getTicketsPage(page),
+            studentsRepository.getAllStudents(),
+            teacherssRepository.getAllTeachers(),
+            ticketEventTypesRepository.getTicketEventTypes(),
+            ticketCountTypesRepositoryRepository.getTicketCountTypes(),
+            Function5 { tickets: List<TicketFullClearModel>,
+                        students: List<StudentShortModel>,
+                        teachers: List<TeacherShortModel>,
+                        eventTypes: List<TicketEventTypeModel>,
+                        coutnTypes: List<TicketCountTypeModel> ->
+                return@Function5 tickets.map { ticket ->
+                    ticket.fill(students, teachers, eventTypes, coutnTypes)
+                }
+            }
+        )
+
+    override fun getTicketById(id: Long): Single<TicketFullClearModel> =
+        ticketsRepository.getTicketById(id)
+
+    override fun createTicket(ticket: TicketFullClearModel): Completable =
+        ticketsRepository.createTicket(ticket)
+
+    fun TicketFullClearModel.fill(
+        students: List<StudentShortModel>,
+        teachers: List<TeacherShortModel>,
+        eventTypes: List<TicketEventTypeModel>,
+        countTypes: List<TicketCountTypeModel>
+    ): TicketFullFilledModel =
+        TicketFullFilledModel(
+            extraLessons = extraLessons,
+            ticketStartDate = ticketStartDate,
+            ticketEndDate = ticketEndDate,
+            ticketBought_date = ticketBought_date,
+            teacher = teachers.first { teach -> teach.id == teacherId },
+            isNullify = isNullify,
+            isInPair = isInPair,
+            id = id,
+            student = students.first { stud -> stud.id == studentId },
+            ticketCountType = countTypes.first { type->type.id == ticketCountTypeId },
+            ticketEventType = eventTypes.first{ type-> type.id == ticketEventTypeId}
+        )
+
+}

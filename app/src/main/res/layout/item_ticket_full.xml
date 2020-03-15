@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/base_margin_half"
+    android:layout_marginTop="@dimen/base_margin_half"
+    android:layout_marginEnd="@dimen/base_margin_half"
+    android:layout_marginBottom="@dimen/base_margin_half"
+    android:background="@color/colorPrimary"
+    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardCornerRadius="7dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_margin_half"
+        android:layout_marginEnd="@dimen/base_margin_half"
+        android:background="@android:color/transparent">
+
+        <TextView
+            android:id="@+id/item_ticket_full_student_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/item_ticket_full_teacher_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Андреев Иван" />
+
+        <TextView
+            android:id="@+id/item_ticket_full_teacher_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_ticket_full_student_name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Антон" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/item_ticket_full_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_margin_half"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_ticket_full_event"
+            app:layout_constraintTop_toBottomOf="@id/item_ticket_full_student_name"
+            tools:text="2020.03.10 - 04.10 - 04.10" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/item_ticket_full_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_half"
+            android:layout_marginTop="@dimen/base_margin_half"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/item_ticket_full_date"
+            app:layout_constraintEnd_toStartOf="@id/item_ticket_full_count"
+            app:layout_constraintTop_toBottomOf="@id/item_ticket_full_student_name"
+            tools:text="Танго" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/item_ticket_full_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_half"
+            android:layout_marginTop="@dimen/base_margin_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/item_ticket_full_event"
+            app:layout_constraintTop_toBottomOf="@id/item_ticket_full_student_name"
+            tools:text="12 занятий" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

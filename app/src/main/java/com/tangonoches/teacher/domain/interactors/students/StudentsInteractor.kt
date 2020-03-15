@@ -5,6 +5,7 @@ import com.tangonoches.teacher.data.models.StudentShortModel
 import com.tangonoches.teacher.domain.repositories.constants.DEFAULT_ID
 import com.tangonoches.teacher.domain.repositories.students.IStudentsRepository
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 class StudentsInteractor(
@@ -12,6 +13,12 @@ class StudentsInteractor(
 ) : IStudentsInteractor {
     override fun getAllStudents(): Single<List<StudentShortModel>> =
         studentsRepository.getAllStudents()
+
+    override fun getAllStudentsObservable(): Observable<List<StudentShortModel>> =
+        studentsRepository.getAllStudentsObservable()
+
+    override fun refreshStudents(): Completable =
+        studentsRepository.refreshStudents()
 
     override fun getStudentById(id: Long): Single<StudentFullModel> =
         studentsRepository.getStudentById(id)
@@ -21,5 +28,10 @@ class StudentsInteractor(
             studentsRepository.saveStudent(student)
         } else {
             studentsRepository.updateStudent(student)
-        }
+        }.andThen(
+            studentsRepository.refreshStudents()
+        )
+
+    override fun deleteStudent(student: StudentFullModel): Completable =
+        studentsRepository.deleteStudent(student)
 }

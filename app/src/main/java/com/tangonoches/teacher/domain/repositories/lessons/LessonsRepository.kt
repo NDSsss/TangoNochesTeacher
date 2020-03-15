@@ -35,4 +35,8 @@ class LessonsRepository(
 
     override fun createLesson(lesson: LessonFullModel): Completable =
         lessonsDataSource.createLesson(lesson)
+
+    override fun deleteLesson(lesson: LessonFullModel): Completable =
+        lessonsDataSource.deleteLesson(lesson)
+            .andThen(refreshLessons())
 }

@@ -18,4 +18,5 @@ interface ILessonsInteractor {
 
     fun updateLesson(lesson: LessonFullModel): Completable
     fun createLesson(lesson: LessonFullModel): Completable
+    fun deleteLesson(lesson: LessonFullModel): Completable
 }

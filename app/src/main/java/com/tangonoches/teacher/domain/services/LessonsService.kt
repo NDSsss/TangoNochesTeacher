@@ -27,4 +27,8 @@ interface LessonsService {
     @POST("teacher/registerLesson")
     fun createLesson(@Body lesson: LessonCreateDto): Completable
 
+    @POST("teacher/deleteLesson")
+    @FormUrlEncoded
+    fun deleteLesson(@Field("id")id:Long): Completable
+
 }

@@ -2,11 +2,13 @@ package com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail
 
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
+import com.tangonoches.teacher.R
 import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.data.models.LessonFullModel
 import com.tangonoches.teacher.domain.editors.lesson.ILessonEditor
 import com.tangonoches.teacher.domain.interactors.ILessonsInteractor
 import com.tangonoches.teacher.presentation.base.BaseVm
+import com.tangonoches.teacher.presentation.base.ShowDialogModel
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonDetailViewType
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonDetailViewType.EDIT
 import io.reactivex.Single
@@ -30,6 +32,9 @@ class LessonDetailVm @Inject constructor(
 
     val saveAction = PublishRelay.create<Unit>()
 
+    val deleteAction = PublishRelay.create<Unit>()
+    val deleteConfirmAction = PublishRelay.create<Unit>()
+
     override fun onFirstStart() {
         super.onFirstStart()
         binds.addAll(
@@ -46,7 +51,7 @@ class LessonDetailVm @Inject constructor(
                         lessonNameRelay.accept(lesson.name)
                         lessonRelay.accept(lesson)
                         lessonsInteractor.getGroups()
-                    }.subscribe { groups ->
+                    }.subWithDefaultError { groups ->
                         groupsRelay.accept(groups)
                     }
             }
@@ -56,7 +61,7 @@ class LessonDetailVm @Inject constructor(
     override fun createBinds() {
         super.createBinds()
         binds.addAll(
-            lessonEditor.getCurrentLessonGroupObservable().subscribe { groups ->
+            lessonEditor.getCurrentLessonGroupObservable().subWithDefaultError { groups ->
                 groupsRelay.accept(groups)
             },
             groupSelectedAction.subscribe { id ->
@@ -77,6 +82,23 @@ class LessonDetailVm @Inject constructor(
                             }
                         )
                 )
+            },
+            deleteAction.subscribe {
+                showDialog(
+                    ShowDialogModel(
+                        message = R.string.lesson_detail_delete_dialog_message,
+                        negativeButtonRes = R.string.lesson_detail_delete_dialog_positive,
+                        negativeAction = {deleteConfirmAction.accept(Unit)},
+                        positiveButtonRes = R.string.lesson_detail_delete_dialog_negative
+                    )
+                )
+            },
+            deleteConfirmAction.subscribe {
+                lessonEditor.deleteLesson()
+                    .subLoading()
+                    .subWithDefaultError {
+                        close()
+                    }
             }
         )
     }

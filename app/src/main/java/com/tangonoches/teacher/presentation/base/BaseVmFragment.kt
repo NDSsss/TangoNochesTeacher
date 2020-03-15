@@ -1,5 +1,6 @@
 package com.tangonoches.teacher.presentation.base
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.tangonoches.teacher.R
 import com.tangonoches.teacher.di.ComponentsHolder
 import com.tangonoches.teacher.di.VmFactoryWrapper
 import io.reactivex.disposables.CompositeDisposable
@@ -81,8 +84,35 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
             },
             vm.showToastAction.subscribe { message ->
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            },
+            vm.showDialogAction.subscribe { dialogModel ->
+                showDialog(dialogModel)
             }
         )
+    }
+
+    protected fun showDialog(dialogModel: ShowDialogModel) {
+        val dialogBuilder = AlertDialog.Builder(requireContext(), R.style.AppDialog)
+        dialogBuilder.setMessage(dialogModel.message)
+        dialogModel.positiveButtonRes?.let { positiveRes ->
+            dialogBuilder.setPositiveButton(positiveRes) { dialog: DialogInterface, p2 ->
+                dialogModel.positiveAction()
+                dialog.dismiss()
+            }
+        }
+        dialogModel.neutralButtonRes?.let { neutralRes ->
+            dialogBuilder.setNegativeButton(neutralRes) { dialog: DialogInterface, p2 ->
+                dialogModel.neutralAction()
+                dialog.dismiss()
+            }
+        }
+        dialogModel.negativeButtonRes?.let { negativeRes ->
+            dialogBuilder.setNegativeButton(negativeRes) { dialog: DialogInterface, p2 ->
+                dialogModel.negativeAction()
+                dialog.dismiss()
+            }
+        }
+        dialogBuilder.show()
     }
 
     protected fun showError(message: String) {

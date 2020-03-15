@@ -5,6 +5,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 
 interface TicketEventTypesService {
-    @GET("")
+    @GET("teacher/allTicketEventTypes")
     fun getAllTicketEventTypes():Single<List<TicketEventTypeDto>>
 }

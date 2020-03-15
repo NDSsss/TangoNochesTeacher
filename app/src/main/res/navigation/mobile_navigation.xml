@@ -21,13 +21,13 @@
         android:id="@+id/nav_students_all"
         android:name="com.tangonoches.teacher.presentation.main.ui.student.allStudents.StudentsAllFragment"
         android:label="@string/menu_students_all_title"
-        tools:layout="@layout/frag_students_all"/>
+        tools:layout="@layout/frag_students_all" />
 
     <fragment
         android:id="@+id/nav_student_detail"
         android:name="com.tangonoches.teacher.presentation.main.ui.student.studentDetail.StudentDetailFragment"
-        android:label="@string/menu_students_all_title"
-        tools:layout="@layout/frag_students_all"/>
+        android:label="@string/menu_student_detail_title"
+        tools:layout="@layout/frag_students_all" />
 
     <fragment
         android:id="@+id/nav_student_scan"
@@ -43,13 +43,7 @@
 
     <fragment
         android:id="@+id/nav_tickets_all"
-        android:name="com.tangonoches.teacher.presentation.main.ui.slideshow.SlideshowFragment"
+        android:name="com.tangonoches.teacher.presentation.main.ui.tickets.ticketsAll.TicketsAllFragment"
         android:label="@string/menu_tickets_all"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_tickets_add"
-        android:name="com.tangonoches.teacher.presentation.main.ui.tools.ToolsFragment"
-        android:label="@string/menu_tickets_add"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/frag_tickets_all" />
 </navigation>

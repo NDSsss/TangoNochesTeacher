@@ -32,7 +32,7 @@ class LessonsVm @Inject constructor(
         binds.addAll(
             requestLessonsAction
                 .filter { groupsValue.hasValue().not() }
-                .subscribe {
+                .subWithDefaultError {
                     currentPage = 1
                     lessonsInteractor.getGroups().flatMap { groups ->
                         groupsValue.accept(groups)
@@ -52,7 +52,7 @@ class LessonsVm @Inject constructor(
             requestNextPageAction.subscribe {
                 lessonsInteractor.getLessonsPage(currentPage)
                     .subLoading()
-                    .subscribe { newLessons ->
+                    .subWithDefaultError { newLessons ->
                         currentPage++
                         if (newLessons.isNotEmpty()) {
                             lessonsLeftEffect.accept(true)
@@ -62,7 +62,7 @@ class LessonsVm @Inject constructor(
                         }
                     }
             },
-            lessonsInteractor.lessonsRefreshObservable().subscribe { refresherLessons ->
+            lessonsInteractor.lessonsRefreshObservable().subWithDefaultError { refresherLessons ->
                 currentPage = 2
                 lessonsLeftEffect.accept(true)
                 allLessonsValue.accept(refresherLessons)
@@ -71,7 +71,9 @@ class LessonsVm @Inject constructor(
                 binds.add(
                     lessonsInteractor.refreshLessons()
                         .subLoading()
-                        .subscribe()
+                        .subWithDefaultError{
+
+                        }
                 )
             }
         )

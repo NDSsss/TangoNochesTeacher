@@ -6,7 +6,7 @@ import com.tangonoches.teacher.presentation.base.BaseVm
 import javax.inject.Inject
 
 class LoginVm @Inject constructor(
-    val loginRepository: ILoginRepository
+    private val loginRepository: ILoginRepository
 ) : BaseVm() {
     val loginEvent = BehaviorRelay.create<Pair<String, String>>()
 
@@ -19,11 +19,9 @@ class LoginVm @Inject constructor(
                 binds.add(
                     loginRepository.login(
                         event.first, event.second
-                    ).subscribe({
+                    ).subWithDefaultError {
                         loginSuccessState.accept(Unit)
-                    }, {
-                        errorRelay.accept(it.localizedMessage?:"Unknown error")
-                    })
+                    }
                 )
             }
         )
