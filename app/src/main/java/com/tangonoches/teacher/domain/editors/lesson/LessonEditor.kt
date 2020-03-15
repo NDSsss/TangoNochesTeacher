@@ -72,8 +72,11 @@ class LessonEditor(
                     groupsRepository.getAllGroups().toObservable()
                 }.subscribe { groups ->
                     Log.d("APP_TAG", "${this::class.java.simpleName} groupState subscribe $groups")
-                    val currGroupId = lesson?.groupId ?: -1L
+                    val currGroupId = lesson?.groupId ?: DEFAULT_ID
                     allgroupsState.accept(groups.map { item -> item.setIsSelected(item.id == currGroupId) })
+                    if (currGroupId == DEFAULT_ID) {
+                        groupSelected(groups[0].id)
+                    }
                 },
             lessonState.subscribe { lesson ->
                 this.name = lesson.name

@@ -11,6 +11,7 @@ import com.tangonoches.teacher.R
 import com.tangonoches.teacher.presentation.base.BaseVmFragment
 import com.tangonoches.teacher.presentation.main.ui.student.studentDetail.STUDENT_ID
 import com.tangonoches.teacher.presentation.main.ui.student.studentDetail.STUDENT_VIEW_TYPE
+import com.tangonoches.teacher.presentation.main.ui.tickets.ticketCreate.DEFAULT_STUDENT_ID
 import kotlinx.android.synthetic.main.frag_students_all.*
 
 class StudentsAllFragment : BaseVmFragment<StudentsAllVm>() {
@@ -39,18 +40,21 @@ class StudentsAllFragment : BaseVmFragment<StudentsAllVm>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         frag_students_all_rv.layoutManager = LinearLayoutManager(requireContext())
-        frag_students_all_rv.adapter = StudentsAllAdapter { openStudentDetailEdit(it) }
+        frag_students_all_rv.adapter = StudentsAllAdapter(
+            { openStudentDetailEdit(it) },
+            { openCreateTicketFragment(it) }
+        )
         vm.requestStudentsAction.accept(Unit)
         frag_students_all_swrl.setOnRefreshListener { vm.refreshStudentsAction.accept(Unit) }
         frag_students_all_search.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                vm.searchQueryState.accept(query?:"")
+                vm.searchQueryState.accept(query ?: "")
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                vm.searchQueryState.accept(newText?:"")
+                vm.searchQueryState.accept(newText ?: "")
                 return true
             }
 
@@ -83,6 +87,12 @@ class StudentsAllFragment : BaseVmFragment<StudentsAllVm>() {
         bundle.putLong(STUDENT_ID, id)
         bundle.putString(STUDENT_VIEW_TYPE, StudentDetailViewType.EDIT.name)
         openFragment(R.id.nav_student_detail, bundle)
+    }
+
+    private fun openCreateTicketFragment(id: Long) {
+        val bundle = Bundle()
+        bundle.putLong(DEFAULT_STUDENT_ID, id)
+        openFragment(R.id.nav_ticket_create, bundle)
     }
 
     enum class StudentDetailViewType {

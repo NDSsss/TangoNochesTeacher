@@ -1,5 +1,6 @@
 package com.tangonoches.teacher.domain.interactors.tickets
 
+import com.jakewharton.rxrelay2.PublishRelay
 import com.tangonoches.teacher.data.models.*
 import com.tangonoches.teacher.domain.repositories.students.IStudentsRepository
 import com.tangonoches.teacher.domain.repositories.teachers.ITeachersRepository
@@ -7,6 +8,7 @@ import com.tangonoches.teacher.domain.repositories.ticketCountTypes.ITicketCount
 import com.tangonoches.teacher.domain.repositories.ticketEventTypes.ITicketEventTypesRepository
 import com.tangonoches.teacher.domain.repositories.tickets.ITicketsRepository
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.Function5
 
@@ -17,6 +19,9 @@ class TicketsInteractor(
     private val studentsRepository: IStudentsRepository,
     private val teacherssRepository: ITeachersRepository
 ) : ITicketsInteractor {
+
+    private val refreshTicketsRelay = PublishRelay.create<Unit>()
+
     override fun getTicketsPage(page: Int): Single<List<TicketFullFilledModel>> =
         Single.zip(
             ticketsRepository.getTicketsPage(page),
@@ -40,6 +45,22 @@ class TicketsInteractor(
 
     override fun createTicket(ticket: TicketFullClearModel): Completable =
         ticketsRepository.createTicket(ticket)
+            .doOnComplete { refreshTicketsRelay.accept(Unit) }
+
+    override fun getRefreshObservable(): Observable<Unit> =
+        refreshTicketsRelay
+
+    override fun getAllStudents(): Single<List<StudentShortModel>> =
+        studentsRepository.getAllStudents()
+
+    override fun getAllTeachers(): Single<List<TeacherShortModel>> =
+        teacherssRepository.getAllTeachers()
+
+    override fun getAllEventTypes(): Single<List<TicketEventTypeModel>> =
+        ticketEventTypesRepository.getTicketEventTypes()
+
+    override fun getAllCountTypes(): Single<List<TicketCountTypeModel>> =
+        ticketCountTypesRepositoryRepository.getTicketCountTypes()
 
     fun TicketFullClearModel.fill(
         students: List<StudentShortModel>,
@@ -57,8 +78,8 @@ class TicketsInteractor(
             isInPair = isInPair,
             id = id,
             student = students.first { stud -> stud.id == studentId },
-            ticketCountType = countTypes.first { type->type.id == ticketCountTypeId },
-            ticketEventType = eventTypes.first{ type-> type.id == ticketEventTypeId}
+            ticketCountType = countTypes.first { type -> type.id == ticketCountTypeId },
+            ticketEventType = eventTypes.first { type -> type.id == ticketEventTypeId }
         )
 
 }

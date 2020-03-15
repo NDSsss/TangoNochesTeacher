@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/base_margin_half">
+
+        <TextView
+            android:id="@+id/frag_ticket_create_student_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:gravity="start"
+            android:text="@string/ticket_create_student_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/frag_ticket_create_student_sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:popupBackground="@color/colorPrimary"
+            android:prompt="@string/lesson_detail_group_hint"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toStartOf="@id/frag_ticket_create_student_scan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_student_hint_tv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/frag_ticket_create_student_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            app:layout_constraintBottom_toBottomOf="@id/frag_ticket_create_student_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_ticket_create_student_sp"
+            app:layout_constraintTop_toTopOf="@id/frag_ticket_create_student_hint_tv"
+            app:srcCompat="@drawable/ic_qr" />
+
+        <TextView
+            android:id="@+id/frag_ticket_create_teacher_hint_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:text="@string/ticket_create_teacher_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_student_sp" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/frag_ticket_create_teacher_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:popupBackground="@color/colorPrimary"
+            android:prompt="@string/lesson_detail_group_hint"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_teacher_hint_tv" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/frag_ticket_create_start_date_til"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin_half"
+            android:hint="@string/ticket_create_date_start_hint"
+            app:layout_constraintEnd_toStartOf="@id/frag_ticket_create_start_date_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_teacher_sp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frag_ticket_create_start_date_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/frag_ticket_create_start_date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_half"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:hint="@string/ticket_create_date_start_hint"
+            app:layout_constraintBottom_toBottomOf="@id/frag_ticket_create_start_date_til"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_ticket_create_start_date_til"
+            app:layout_constraintTop_toTopOf="@id/frag_ticket_create_start_date_til"
+            app:srcCompat="@drawable/ic_date_pick" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/frag_ticket_create_end_date_til"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin_half"
+            android:hint="@string/ticket_create_date_end_hint"
+            app:layout_constraintEnd_toStartOf="@id/frag_ticket_create_end_date_picker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_start_date_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frag_ticket_create_end_date_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/frag_ticket_create_end_date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_half"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:hint="@string/ticket_create_date_start_hint"
+            app:layout_constraintBottom_toBottomOf="@id/frag_ticket_create_end_date_til"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_ticket_create_end_date_til"
+            app:layout_constraintTop_toTopOf="@id/frag_ticket_create_end_date_til"
+            app:srcCompat="@drawable/ic_date_pick" />
+
+        <TextView
+            android:id="@+id/frag_ticket_create_event_type_hint_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:text="@string/ticket_create_event_type_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_end_date_til" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/frag_ticket_create_event_type_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:popupBackground="@color/colorPrimary"
+            android:prompt="@string/lesson_detail_group_hint"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_event_type_hint_tv" />
+
+        <TextView
+            android:id="@+id/frag_ticket_create_count_type_hint_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:text="@string/ticket_create_count_type_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_event_type_sp" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/frag_ticket_create_count_type_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:popupBackground="@color/colorPrimary"
+            android:prompt="@string/lesson_detail_group_hint"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_count_type_hint_tv" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/frag_ticket_create_is_in_pair_cb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:text="@string/ticket_create_is_in_pair_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_count_type_sp" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/frag_ticket_create_is_nullify_cb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:text="@string/ticket_create_is_nullify_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_is_in_pair_cb" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/frag_ticket_create_extra_lessons_minus_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@id/frag_ticket_create_extra_lessons_til"
+            app:layout_constraintEnd_toStartOf="@id/frag_ticket_create_extra_lessons_til"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/frag_ticket_create_extra_lessons_til" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/frag_ticket_create_extra_lessons_til"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_half"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin_half"
+            android:hint="@string/ticket_create_extra_lessons_hint"
+            app:layout_constraintEnd_toStartOf="@id/frag_ticket_create_extra_lessons_plus_btn"
+            app:layout_constraintStart_toEndOf="@id/frag_ticket_create_extra_lessons_minus_btn"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_is_nullify_cb">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frag_ticket_create_extra_lessons_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:gravity="center" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/frag_ticket_create_extra_lessons_plus_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@id/frag_ticket_create_extra_lessons_til"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frag_ticket_create_extra_lessons_til"
+            app:layout_constraintTop_toTopOf="@id/frag_ticket_create_extra_lessons_til" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/frag_ticket_create_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:layout_marginBottom="@dimen/base_margin"
+            android:text="@string/ticket_create_save_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_ticket_create_extra_lessons_til" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

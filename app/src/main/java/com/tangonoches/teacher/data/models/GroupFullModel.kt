@@ -17,7 +17,8 @@ data class GroupFullModel(
     fun setIsSelected(isSelected: Boolean): GroupFullModel =
         this.copy(isSelected = isSelected)
 
+    override fun toString(): String = name
 }
 
-fun List<GroupFullModel>.getSelectedPosition(): Int =
+fun List<BaseChipItem>.getSelectedPosition(): Int =
     this.indexOfFirst { item -> item.isSelected }

@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frag_tickets_all_swipe"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/frag_tickets_all_rv"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/frag_tickets_all_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_margin"
+        android:layout_marginTop="@dimen/base_margin_half"
+        android:layout_marginEnd="@dimen/base_margin"
+        android:layout_marginBottom="@dimen/base_margin_half"
+        app:iconifiedByDefault="false" />
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/frag_tickets_all_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/frag_tickets_all_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

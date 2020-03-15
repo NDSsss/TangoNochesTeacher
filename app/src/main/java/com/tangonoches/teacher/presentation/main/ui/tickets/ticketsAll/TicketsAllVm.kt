@@ -5,6 +5,10 @@ import com.jakewharton.rxrelay2.PublishRelay
 import com.tangonoches.teacher.data.models.TicketFullFilledModel
 import com.tangonoches.teacher.domain.interactors.tickets.ITicketsInteractor
 import com.tangonoches.teacher.presentation.base.BaseVm
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class TicketsAllVm @Inject constructor(
@@ -12,6 +16,9 @@ class TicketsAllVm @Inject constructor(
 ) : BaseVm() {
 
     val tickersState = BehaviorRelay.create<List<TicketFullFilledModel>>()
+    val ticketsFiltredState = BehaviorRelay.create<List<TicketFullFilledModel>>()
+
+    val searchQueryState = BehaviorRelay.createDefault("")
 
     val hasMorePagesState = BehaviorRelay.create<Boolean>()
 
@@ -50,7 +57,39 @@ class TicketsAllVm @Inject constructor(
                             nextPage++
                         }
                 )
-            }
+            },
+            ticketsInteractor.getRefreshObservable().subscribe {
+                refreshAction.accept(it)
+            },
+            tickersState.subscribe { tickets ->
+                val searchQuery = searchQueryState.getValueOrThrowNPE().toLowerCase()
+                ticketsFiltredState.accept(tickets.filter {
+                    it.student.name.toLowerCase().contains(searchQuery)
+                            || it.student.barcodeId.toString().toLowerCase().contains(searchQuery)
+                })
+            },
+            searchQueryState.debounce(500, TimeUnit.MILLISECONDS)
+                .subscribe { query ->
+                    val searchQuery = query.toLowerCase()
+                    if (tickersState.hasValue()) {
+                        val tickets = tickersState.getValueOrThrowNPE()
+                        binds.add(
+                            Single.fromCallable {
+                                tickets.filter {
+                                    it.student.name.toLowerCase().contains(searchQuery)
+                                            || it.student.barcodeId.toString().toLowerCase().contains(
+                                        searchQuery
+                                    )
+                                }
+                            }
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subWithDefaultError { filtredList ->
+                                    ticketsFiltredState.accept(filtredList)
+                                }
+                        )
+                    }
+                }
         )
     }
 }

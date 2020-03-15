@@ -63,4 +63,16 @@
     <string name="student_detail_delete_dialog_message">Дейсвительно удалить ученика?</string>
     <string name="student_detail_delete_dialog_positive">Удалить</string>
     <string name="student_detail_delete_dialog_negative">Отмена</string>
+
+    <string name="ticket_create_title">Добавить вбонимент</string>
+    <string name="ticket_create_student_hint">Выберите ученика</string>
+    <string name="ticket_create_teacher_hint">Выберите преподователя</string>
+    <string name="ticket_create_date_start_hint">Дата начала</string>
+    <string name="ticket_create_date_end_hint">Дата окончания</string>
+    <string name="ticket_create_event_type_hint">Тип абонимента</string>
+    <string name="ticket_create_count_type_hint">Количество занятий</string>
+    <string name="ticket_create_extra_lessons_hint">Корректировка количества</string>
+    <string name="ticket_create_is_in_pair_hint">В паре</string>
+    <string name="ticket_create_is_nullify_hint">Обнулить существующие уроки</string>
+    <string name="ticket_create_save_btn">Сохранить</string>
 </resources>

@@ -20,7 +20,7 @@ interface TicketsService {
     @FormUrlEncoded
     fun getTicketById(@Field("id") id: Long): Single<TicketFullClearDto>
 
-    @POST("teacher/registerLesson")
+    @POST("teacher/registerTicket")
     fun createTicket(@Body ticket: TicketCreateDto): Completable
 
 }

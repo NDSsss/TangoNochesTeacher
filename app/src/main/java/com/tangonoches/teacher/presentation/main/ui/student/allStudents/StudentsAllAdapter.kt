@@ -10,7 +10,8 @@ import com.tangonoches.teacher.data.models.StudentShortModel
 import kotlinx.android.synthetic.main.item_student.view.*
 
 class StudentsAllAdapter(
-    private val detailListener: (Long) -> Unit
+    private val detailListener: (Long) -> Unit,
+    private val addTicketListener: (Long) -> Unit
 ) : RecyclerView.Adapter<StudentShortVh>() {
 
     var students: List<StudentShortModel> = listOf()
@@ -32,18 +33,20 @@ class StudentsAllAdapter(
     override fun getItemCount(): Int = students.size
 
     override fun onBindViewHolder(holder: StudentShortVh, position: Int) {
-        holder.bind(students[position], detailListener)
+        holder.bind(students[position], detailListener, addTicketListener)
     }
 }
 
 class StudentShortVh(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(
         student: StudentShortModel,
-        detailListener: (Long) -> Unit
+        detailListener: (Long) -> Unit,
+        addTicketListener: (Long) -> Unit
     ) {
         Log.d("APP_TAG", "StudentShortVh bind student $student")
         itemView.item_student_name.text = student.name
         itemView.item_student_ticket_id.text = student.barcodeId.toString()
         itemView.item_student_edit.setOnClickListener { detailListener(student.id) }
+        itemView.item_student_create_ticket.setOnClickListener { addTicketListener(student.id) }
     }
 }

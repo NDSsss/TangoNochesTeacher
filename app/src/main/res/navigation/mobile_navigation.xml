@@ -46,4 +46,10 @@
         android:name="com.tangonoches.teacher.presentation.main.ui.tickets.ticketsAll.TicketsAllFragment"
         android:label="@string/menu_tickets_all"
         tools:layout="@layout/frag_tickets_all" />
+
+    <fragment
+        android:id="@+id/nav_ticket_create"
+        android:name="com.tangonoches.teacher.presentation.main.ui.tickets.ticketCreate.TicketCreateFragment"
+        android:label="@string/ticket_create_title"
+        tools:layout="@layout/frag_ticket_create" />
 </navigation>

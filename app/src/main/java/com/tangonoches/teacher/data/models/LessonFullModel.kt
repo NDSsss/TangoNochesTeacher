@@ -4,7 +4,7 @@ import com.tangonoches.teacher.domain.repositories.constants.DEFAULT_ID
 
 data class LessonFullModel(
     val createdAt: String? = "",
-    val groupId: Long = 0,
+    val groupId: Long = DEFAULT_ID,
     val id: Long = DEFAULT_ID,
     val name: String = "",
     val students: List<Long> = listOf(),

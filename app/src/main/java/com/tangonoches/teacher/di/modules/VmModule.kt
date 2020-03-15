@@ -11,6 +11,7 @@ import com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail.LessonD
 import com.tangonoches.teacher.presentation.main.ui.lessons.scanStudent.ScanStudentsFragmentVm
 import com.tangonoches.teacher.presentation.main.ui.student.allStudents.StudentsAllVm
 import com.tangonoches.teacher.presentation.main.ui.student.studentDetail.StudentDetailVm
+import com.tangonoches.teacher.presentation.main.ui.tickets.ticketCreate.TicketCreateVm
 import com.tangonoches.teacher.presentation.main.ui.tickets.ticketsAll.TicketsAllVm
 import com.tangonoches.teacher.presentation.view.chips.StudentsChipsVm
 import com.tangonoches.teacher.presentation.view.chips.TeacherChipsVm
@@ -71,6 +72,11 @@ interface VmModule {
     @IntoMap
     @VmKeyName(TicketsAllVm::class)
     fun bindTicketsAllVm(viewModel: TicketsAllVm): ViewModel
+
+    @Binds
+    @IntoMap
+    @VmKeyName(TicketCreateVm::class)
+    fun bindTicketCreateVm(viewModel: TicketCreateVm): ViewModel
 
     @Binds
     @Singleton

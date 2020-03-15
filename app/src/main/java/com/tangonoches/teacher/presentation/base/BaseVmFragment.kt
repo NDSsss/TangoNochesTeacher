@@ -39,9 +39,14 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("lifecycle", "${this::class.java.simpleName} onCreate")
         ComponentsHolder.mainComponent.inject(vmFactoryWrapper)
+        preCreateVmBinds()
         vm.viewCreated()
         super.onCreate(savedInstanceState)
         firstStart = false
+    }
+
+    protected open fun preCreateVmBinds(){
+
     }
 
     override fun onCreateView(

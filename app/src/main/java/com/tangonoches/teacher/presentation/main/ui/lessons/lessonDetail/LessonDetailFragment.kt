@@ -76,7 +76,7 @@ class LessonDetailFragment : BaseVmFragment<LessonDetailVm>() {
         frag_lesson_detail_students_chips.initVm(studentsChipsWidgetVm, firstViewCreate)
         frag_lesson_detail_teachers_chips.hideScan()
         frag_lesson_detail_group_sp.adapter = GroupsSpinnerAdapter { itemId ->
-            vm.groupSelectedAction.accept(itemId)
+            vm.groupSelectedAction.accept(itemId.id)
         }
     }
 
@@ -91,7 +91,7 @@ class LessonDetailFragment : BaseVmFragment<LessonDetailVm>() {
                     adapter.groupsList = groups
                 }
                 val selectedIndex = groups.getSelectedPosition()
-                if (selectedIndex > 0) {
+                if (selectedIndex > -1) {
                     frag_lesson_detail_group_sp.setSelection(selectedIndex)
                 }
                 closeSpinner(frag_lesson_detail_group_sp)
