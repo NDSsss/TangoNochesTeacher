@@ -7,10 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="actionMenuTextColor">@color/colorAppAccent</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="actionMenuTextColor">@color/text_color</item>
         <item name="buttonStyle">@style/ButtonsStyle</item>
-        <item name="editTextColor">@color/textColorWhiteHalf</item>
+        <item name="editTextColor">@color/text_color</item>
         <item name="android:popupBackground">@color/colorPrimary</item>
         <item name="android:itemBackground">@color/colorPrimary</item>
     </style>
@@ -31,9 +31,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/text_color</item>
         <item name="buttonStyle">@style/ButtonsStyle</item>
-        <item name="editTextColor">@color/textColorWhiteHalf</item>
+        <item name="editTextColor">@color/text_color</item>
         <item name="android:popupBackground">@color/colorPrimary</item>
         <item name="android:itemBackground">@color/colorPrimary</item>
     </style>

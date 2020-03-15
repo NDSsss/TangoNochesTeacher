@@ -15,5 +15,9 @@
     <color name="btnDisabled">#535179</color>
     <color name="btnPressed">#6a57f4</color>
 
+    <color name="textColorSelected">@color/textColorWhiteHalf</color>
+    <color name="textColorDisabled">@color/btnDisabled</color>
+    <color name="textColorDef">#fff</color>
+
     <color name="textColorWhiteHalf">#88ffffff</color>
 </resources>
