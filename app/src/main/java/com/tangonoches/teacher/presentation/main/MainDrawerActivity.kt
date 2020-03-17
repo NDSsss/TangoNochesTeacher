@@ -1,8 +1,12 @@
 package com.tangonoches.teacher.presentation.main
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -17,8 +21,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.presentation.base.BaseVmActivity
+import com.tangonoches.teacher.presentation.base.IActivityInterface
+import kotlinx.android.synthetic.main.content_main_drawer.*
 
-class MainDrawerActivity : BaseVmActivity<MainDrawerVm>() {
+class MainDrawerActivity : BaseVmActivity<MainDrawerVm>(), IActivityInterface {
     override val layoutId: Int = R.layout.activity_main_drawer
 
     override fun getVmClass(): Class<MainDrawerVm> =
@@ -66,5 +72,23 @@ class MainDrawerActivity : BaseVmActivity<MainDrawerVm>() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun startLoading() {
+        Log.d("lifecycle", "${this::class.java.simpleName} startLoading")
+        nav_host_loading.visibility = View.VISIBLE
+    }
+
+    override fun completeLiading() {
+        Log.d("lifecycle", "${this::class.java.simpleName} startLoading")
+        nav_host_loading.visibility = View.GONE
+    }
+
+    override fun hideKeyboard() {
+        val view = this.currentFocus
+        view?.let { v ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(v.windowToken, 0)
+        }
     }
 }

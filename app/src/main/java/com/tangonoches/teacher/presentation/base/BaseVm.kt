@@ -60,10 +60,12 @@ abstract class BaseVm : ViewModel() {
     }
 
     protected fun startLoading() {
+        Log.d("lifecycle", "${this::class.java.simpleName} startLoading")
         loadingState.accept(true)
     }
 
     protected fun completeLoading() {
+        Log.d("lifecycle", "${this::class.java.simpleName} completeLoading")
         loadingState.accept(false)
     }
 

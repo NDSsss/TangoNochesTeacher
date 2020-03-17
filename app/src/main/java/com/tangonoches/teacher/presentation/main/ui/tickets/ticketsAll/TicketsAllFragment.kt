@@ -72,11 +72,16 @@ class TicketsAllFragment : BaseVmFragment<TicketsAllVm>() {
                 (frag_tickets_all_rv.adapter as? TicketsAdapter)?.let { adapter ->
                     adapter.hasMorePages = hasMorePages
                 }
-            },
-            vm.loadingState.subscribe { isLoading ->
-                frag_tickets_all_swipe.isRefreshing = isLoading
             }
         )
+    }
+
+    override fun startLoading() {
+        frag_tickets_all_swipe.isRefreshing = true
+    }
+
+    override fun completeLoading() {
+        frag_tickets_all_swipe.isRefreshing = false
     }
 
     private fun openTicketCreateFragment() {

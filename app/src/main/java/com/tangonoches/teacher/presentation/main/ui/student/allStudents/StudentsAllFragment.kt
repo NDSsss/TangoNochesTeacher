@@ -69,10 +69,7 @@ class StudentsAllFragment : BaseVmFragment<StudentsAllVm>() {
                     (frag_students_all_rv.adapter as? StudentsAllAdapter)?.let { adapter ->
                         adapter.students = it
                     }
-                },
-            vm.loadingState.subscribe {
-                frag_students_all_swrl.isRefreshing = it
-            }
+                }
         )
     }
 
@@ -93,6 +90,14 @@ class StudentsAllFragment : BaseVmFragment<StudentsAllVm>() {
         val bundle = Bundle()
         bundle.putLong(DEFAULT_STUDENT_ID, id)
         openFragment(R.id.nav_ticket_create, bundle)
+    }
+
+    override fun startLoading() {
+        frag_students_all_swrl.isRefreshing = true
+    }
+
+    override fun completeLoading() {
+        frag_students_all_swrl.isRefreshing = false
     }
 
     enum class StudentDetailViewType {

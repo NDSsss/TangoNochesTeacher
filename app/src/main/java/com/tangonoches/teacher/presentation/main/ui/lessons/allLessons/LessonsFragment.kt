@@ -56,9 +56,6 @@ class LessonsFragment : BaseVmFragment<LessonsVm>() {
                 (frag_lessons_rv.adapter as? LessonsAdapter).let {
                     it?.addGroups(newGroups)
                 }
-            },
-            vm.loadingState.subscribe {
-                frag_lessons_swipe.isRefreshing = it
             }
         )
     }
@@ -89,6 +86,14 @@ class LessonsFragment : BaseVmFragment<LessonsVm>() {
         bundle.putLong(LESSON_DETAIL_ID, lessonId)
         bundle.putString(LESSON_DETAIL_VIEW_TYPE, LessonDetailViewType.EDIT.name)
         openFragment(R.id.nav_lessons_detail, bundle)
+    }
+
+    override fun startLoading() {
+        frag_lessons_swipe.isRefreshing = true
+    }
+
+    override fun completeLoading() {
+        frag_lessons_swipe.isRefreshing = false
     }
 }
 

@@ -73,6 +73,7 @@ class LessonDetailVm @Inject constructor(
             saveAction.subscribe {
                 binds.add(
                     lessonEditor.saveLesson()
+                        .subLoading()
                         .subscribe(
                             {
                                 closeRelay.accept(Unit)

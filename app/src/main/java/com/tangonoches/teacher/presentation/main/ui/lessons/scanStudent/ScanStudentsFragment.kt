@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -11,6 +12,7 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.presentation.base.BaseVmFragment
 import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.frag_scan_students.*
 import me.dm7.barcodescanner.zbar.Result
 import me.dm7.barcodescanner.zbar.ZBarScannerView
@@ -125,6 +127,7 @@ class ScanStudentsFragment : BaseVmFragment<ScanStudentsFragmentVm>(),
     private fun resumeScanning() {
         vmBinds.add(
             Completable.complete().delay(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     frag_scan_students_zbar.resumeCameraPreview(this)
                 }

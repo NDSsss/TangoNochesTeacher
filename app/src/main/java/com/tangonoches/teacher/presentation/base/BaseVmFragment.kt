@@ -45,7 +45,7 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
         firstStart = false
     }
 
-    protected open fun preCreateVmBinds(){
+    protected open fun preCreateVmBinds() {
 
     }
 
@@ -73,6 +73,7 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
 
     override fun onPause() {
         Log.d("lifecycle", "${this::class.java.simpleName} onPause")
+        hideKeyboard()
         vmBinds.clear()
         super.onPause()
     }
@@ -92,6 +93,13 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
             },
             vm.showDialogAction.subscribe { dialogModel ->
                 showDialog(dialogModel)
+            },
+            vm.loadingState.subscribe {
+                if (it) {
+                    startLoading()
+                } else {
+                    completeLoading()
+                }
             }
         )
     }
@@ -139,5 +147,25 @@ abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
 
     protected fun back() {
         findNavController().navigateUp()
+    }
+
+    protected open fun startLoading() {
+        Log.d("lifecycle", "${this::class.java.simpleName} startLoading")
+        (activity as? IActivityInterface).let { act ->
+            act?.startLoading()
+        }
+    }
+
+    protected open fun completeLoading() {
+        Log.d("lifecycle", "${this::class.java.simpleName} completeLoading")
+        (activity as? IActivityInterface).let { act ->
+            act?.completeLiading()
+        }
+    }
+
+    protected fun hideKeyboard() {
+        (activity as? IActivityInterface).let { act ->
+            act?.hideKeyboard()
+        }
     }
 }

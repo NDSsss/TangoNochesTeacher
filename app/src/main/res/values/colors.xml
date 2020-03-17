@@ -20,4 +20,6 @@
     <color name="textColorDef">#fff</color>
 
     <color name="textColorWhiteHalf">#88ffffff</color>
+
+    <color name="bgLoading">#88535179</color>
 </resources>
