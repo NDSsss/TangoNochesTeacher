@@ -16,7 +16,7 @@ class TicketCreateVm @Inject constructor(
     val defaultStudentId = BehaviorRelay.create<Long>()
     val defaultTeacherId = BehaviorRelay.create<Long>()
     val defaultEventTypeId = BehaviorRelay.create<Long>()
-    val defaultCountTypeId = BehaviorRelay.create<Long>()
+    val defaultCountTypeId = BehaviorRelay.createDefault<Long>(2)
 
     val ticketState = BehaviorRelay.createDefault<TicketFullClearModel>(TicketFullClearModel())
 
@@ -36,7 +36,7 @@ class TicketCreateVm @Inject constructor(
     val increaseExtraLessonsActions = PublishRelay.create<Unit>()
     val decreaseExtraLessonsActions = PublishRelay.create<Unit>()
     val isInPair = BehaviorRelay.createDefault<Boolean>(false)
-    val isNullify = BehaviorRelay.createDefault<Boolean>(false)
+    val isNullify = BehaviorRelay.createDefault<Boolean>(true)
 
     val studentScanedAction = PublishRelay.create<Long>()
     val saveAction = PublishRelay.create<Unit>()

@@ -44,7 +44,7 @@ class NetModule {
     @Singleton
     fun providesRetrofit(okkClient: OkHttpClient, gson: Gson): Retrofit =
         Retrofit.Builder()
-            .baseUrl("http://ndssss.beget.tech/api/")
+            .baseUrl("http://tangonoches.famedev.ru/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okkClient)

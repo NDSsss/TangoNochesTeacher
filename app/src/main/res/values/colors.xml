@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#333253</color>
-    <color name="colorPrimaryDark">#333253</color>
+    <color name="colorPrimary">#A0B6DC</color>
+    <color name="colorPrimaryDark">#7489AF</color>
     <color name="colorAccent">#7f49a8</color>
     <color name="colorLessonStartGradient">#6139b2</color>
     <color name="colorLessonEndGradient">#8a51f9</color>
@@ -17,9 +17,9 @@
 
     <color name="textColorSelected">@color/textColorWhiteHalf</color>
     <color name="textColorDisabled">@color/btnDisabled</color>
-    <color name="textColorDef">#fff</color>
+    <color name="textColorDef">#000000</color>
 
-    <color name="textColorWhiteHalf">#88ffffff</color>
+    <color name="textColorWhiteHalf">#6F7676</color>
 
     <color name="bgLoading">#88535179</color>
 </resources>
