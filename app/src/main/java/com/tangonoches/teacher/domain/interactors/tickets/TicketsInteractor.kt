@@ -73,13 +73,19 @@ class TicketsInteractor(
             ticketStartDate = ticketStartDate,
             ticketEndDate = ticketEndDate,
             ticketBought_date = ticketBought_date,
-            teacher = teachers.first { teach -> teach.id == teacherId },
+            teacher = teachers.firstOrNull { teach -> teach.id == teacherId } ?: TeacherShortModel(
+                name = "Не найден"
+            ),
             isNullify = isNullify,
             isInPair = isInPair,
             id = id,
-            student = students.first { stud -> stud.id == studentId },
-            ticketCountType = countTypes.first { type -> type.id == ticketCountTypeId },
-            ticketEventType = eventTypes.first { type -> type.id == ticketEventTypeId }
+            student = students.firstOrNull { stud -> stud.id == studentId } ?: StudentShortModel(
+                name = "Не найден"
+            ),
+            ticketCountType = countTypes.firstOrNull { type -> type.id == ticketCountTypeId }
+                ?: TicketCountTypeModel(name = "Не найден"),
+            ticketEventType = eventTypes.firstOrNull { type -> type.id == ticketEventTypeId }
+                ?: TicketEventTypeModel(name = "Не найден")
         )
 
 }
