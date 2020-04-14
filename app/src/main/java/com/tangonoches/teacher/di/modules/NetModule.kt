@@ -3,6 +3,7 @@ package com.tangonoches.teacher.di.modules
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.tangonoches.teacher.BuildConfig
 import com.tangonoches.teacher.data.serialization.DateDeserializer
 import com.tangonoches.teacher.data.serialization.DateSerializer
 import com.tangonoches.teacher.domain.datasources.web.interceptors.IApiTokenInterceptor
@@ -30,7 +31,6 @@ class NetModule {
     @Provides
     @Singleton
     fun provideOkkHttpClient(apiTokenInterceptor: IApiTokenInterceptor): OkHttpClient {
-        Log.d("APP_TAG", "provideOkkHttpClient")
         val logInterceptor = HttpLoggingInterceptor()
         logInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val clientBuilder = OkHttpClient.Builder()
@@ -44,7 +44,7 @@ class NetModule {
     @Singleton
     fun providesRetrofit(okkClient: OkHttpClient, gson: Gson): Retrofit =
         Retrofit.Builder()
-            .baseUrl("http://tangonoches.famedev.ru/api/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okkClient)

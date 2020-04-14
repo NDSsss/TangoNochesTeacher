@@ -28,8 +28,27 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        val appName = "TangoNoches Teacher"
+        getByName("debug"){
             isMinifyEnabled = false
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+            buildConfigField("String", "BASE_URL", "\"http://tangonoches.famedev-stage.ru/api/\"")
+            resValue("string", "app_name_build", "$appName Stage")
+        }
+        signingConfigs {
+            create("release") {
+                storeFile = file("${project.projectDir.absolutePath}/../tango_noches_teacher.jks")
+                storePassword = "Parolmoi1997"
+                keyAlias = "tango_noches_teacher_alias"
+                keyPassword = "Parolmoi1997"
+            }
+        }
+        getByName("release"){
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
+            buildConfigField("String", "BASE_URL", "\"http://tangonoches.famedev.ru/api/\"")
+            resValue("string", "app_name_build", appName)
         }
     }
 
