@@ -70,7 +70,9 @@ class StudentDetailFragment : BaseVmFragment<StudentDetailVm>() {
                 }.subscribe {
                 vm.barcodeIdState.accept(it.toString().toLong())
             },
-            frag_student_detail_points_et.textChanges().skipInitialValue().subscribe {
+            frag_student_detail_points_et.textChanges().skipInitialValue().filter {
+                it.toString().toIntOrNull() != null
+            }.subscribe {
                 vm.pointsState.accept(it.toString().toInt())
             },
             frag_student_detail_extra_info_et.textChanges().skipInitialValue().subscribe {
