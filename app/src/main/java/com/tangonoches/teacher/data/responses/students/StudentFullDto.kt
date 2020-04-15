@@ -23,7 +23,8 @@ data class StudentFullDto(
     val push_token: String? = "",
     val updated_at: String? = "",
     val vk_profile_id: Long = DEFAULT_ID,
-    val vk_profile_link: String? = ""
+    val vk_profile_link: String? = "",
+    val points:Int = 0
 )
 
 fun StudentFullDto.toModel(): StudentFullModel =
@@ -42,7 +43,8 @@ fun StudentFullDto.toModel(): StudentFullModel =
         pushToken = push_token ?: "",
         updatedAt = updated_at ?: "",
         vkProfileId = vk_profile_id,
-        vkProfilelink = vk_profile_link ?: ""
+        vkProfilelink = vk_profile_link ?: "",
+        points = this.points
     )
 
 data class StudentFullDtoToUpdate(
@@ -105,6 +107,7 @@ fun StudentFullModel.toUpdateMap(): Map<String, Any?> {
     resultMap["photo_link"] = photoLink
     resultMap["push_token"] = pushToken
     resultMap["vk_profile_link"] = vkProfilelink
+    resultMap["points"] = points
 
     return resultMap
 }

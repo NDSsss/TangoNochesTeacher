@@ -60,6 +60,23 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/frag_student_detail_points_til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:layout_marginTop="@dimen/base_margin_half"
+            android:layout_marginEnd="@dimen/base_margin"
+            android:layout_marginBottom="@dimen/base_margin_half"
+            android:hint="@string/student_detail_hint_points">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frag_student_detail_points_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/frag_student_detail_extra_info_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

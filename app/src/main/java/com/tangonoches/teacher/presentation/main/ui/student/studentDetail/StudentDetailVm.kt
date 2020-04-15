@@ -28,6 +28,7 @@ class StudentDetailVm @Inject constructor(
     val vkState = BehaviorRelay.create<String>()
     val facebookState = BehaviorRelay.create<String>()
     val instagramState = BehaviorRelay.create<String>()
+    val pointsState = BehaviorRelay.create<Int>()
 
     val saveStudentAction = PublishRelay.create<Unit>()
     val deleteAction = PublishRelay.create<Unit>()
@@ -62,6 +63,7 @@ class StudentDetailVm @Inject constructor(
                 vkState.accept(student.vkProfilelink)
                 facebookState.accept(student.facebookProfileLink)
                 instagramState.accept(student.instagramProfileLink)
+                pointsState.accept(student.points)
             },
             saveStudentAction.subscribe {
                 saveStudent()
@@ -96,7 +98,8 @@ class StudentDetailVm @Inject constructor(
             extraInfo = extraInfoState.getValueOrThrowNPE(),
             vkProfilelink = vkState.getValueOrThrowNPE(),
             facebookProfileLink = facebookState.getValueOrThrowNPE(),
-            instagramProfileLink = instagramState.getValueOrThrowNPE()
+            instagramProfileLink = instagramState.getValueOrThrowNPE(),
+            points = pointsState.getValueOrThrowNPE()
         )
         binds.addAll(
             studentsInteractor.saveStudent(studentToSave)

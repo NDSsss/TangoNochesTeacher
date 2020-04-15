@@ -17,5 +17,6 @@ data class StudentFullModel(
     val pushToken: String = "",
     val updatedAt: String = "",
     val vkProfileId: Long = DEFAULT_ID,
-    val vkProfilelink: String = ""
+    val vkProfilelink: String = "",
+    val points: Int = 0
 )

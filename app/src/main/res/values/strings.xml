@@ -59,6 +59,7 @@
     <string name="student_detail_hint_instagram">Страница инстаграмм</string>
     <string name="student_detail_hint_extra_info">Дополнительная информация</string>
     <string name="student_detail_hint_barcode_id">Номер клубной карты</string>
+    <string name="student_detail_hint_points">Баллы</string>
     <string name="student_detail_save_btn">Сохранить</string>
     <string name="student_detail_delete_dialog_message">Дейсвительно удалить ученика?</string>
     <string name="student_detail_delete_dialog_positive">Удалить</string>
