@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.compilerRunner.processCompilerOutput
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -6,7 +7,6 @@ plugins {
     kotlin("android.extensions")
     id("kotlin-kapt")
 }
-
 android {
     val ext = rootProject.extra
     compileSdkVersion(29)
@@ -26,23 +26,26 @@ android {
         sourceCompatibility = ext["javaVer"] as JavaVersion
         targetCompatibility = ext["javaVer"] as JavaVersion
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("${project.projectDir.absolutePath}/../tango_noches_teacher.jks")
+            storePassword = "Parolmoi1997"
+            keyAlias = "tango_noches_teacher_alias"
+            keyPassword = "Parolmoi1997"
+        }
+    }
 
     buildTypes {
         val appName = "TangoNoches Teacher"
+        val apkBaseName = "TangoNoches_Teacher"
         getByName("debug"){
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             buildConfigField("String", "BASE_URL", "\"http://tangonoches.famedev-stage.ru/api/\"")
             resValue("string", "app_name_build", "$appName Stage")
-        }
-        signingConfigs {
-            create("release") {
-                storeFile = file("${project.projectDir.absolutePath}/../tango_noches_teacher.jks")
-                storePassword = "Parolmoi1997"
-                keyAlias = "tango_noches_teacher_alias"
-                keyPassword = "Parolmoi1997"
-            }
+
+            setProperty("archivesBaseName", "${apkBaseName}_v${(properties["versionName"])}")
         }
         getByName("release"){
             isMinifyEnabled = false
