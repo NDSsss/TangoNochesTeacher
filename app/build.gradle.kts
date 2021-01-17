@@ -6,6 +6,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 android {
     val ext = rootProject.extra
@@ -15,6 +16,7 @@ android {
     defaultConfig {
         minSdkVersion(19)
         targetSdkVersion(29)
+        applicationId = "com.tangonoches"
         versionCode = 2
         versionName = "2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -43,9 +45,9 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             buildConfigField("String", "BASE_URL", "\"http://tangonoches.famedev-stage.ru/api/\"")
-            resValue("string", "app_name_build", "$appName Stage")
+            resValue("string", "app_name_build", "Debug $appName Stage")
 
-            setProperty("archivesBaseName", "${apkBaseName}_v${(properties["versionName"])}")
+            setProperty("archivesBaseName", "Debug ${apkBaseName}_v${(properties["versionName"])}")
         }
         getByName("release"){
             isMinifyEnabled = false
@@ -88,7 +90,8 @@ dependencies {
     implementation("me.dm7.barcodescanner:zbar:1.9.13")
     implementation("org.conscrypt:conscrypt-android:2.2.1")
     implementation("androidx.multidex:multidex:2.0.0")
-
+    implementation("com.google.firebase:firebase-analytics:17.2.2")
+    implementation("com.google.firebase:firebase-messaging:20.1.7")
     implementation(ext["dagger"] as String)
     kapt(ext["daggerCompiler"] as String)
     kaptAndroidTest(ext["daggerCompiler"] as String)
