@@ -1,2 +1,8 @@
-include ':app'
-rootProject.name='TangoNochesTeacher'
+include ':arch'
+include ':common'
+include ':teacher-network'
+include ':teacher-login-data'
+include ':teacher-login-domain'
+include ':teacher-login-presentation'
+
+include ':teacher'

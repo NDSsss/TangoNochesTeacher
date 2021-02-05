@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_lessons_all">
+
+    <fragment
+        android:id="@+id/nav_lessons_all"
+        android:name="com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonsFragment"
+        android:label="@string/menu_lessons_all"
+        tools:layout="@layout/frag_lessons" />
+
+    <fragment
+        android:id="@+id/nav_students_all"
+        android:name="com.tangonoches.teacher.presentation.main.ui.student.allStudents.StudentsAllFragment"
+        android:label="@string/menu_students_all_title"
+        tools:layout="@layout/frag_students_all" />
+
+    <fragment
+        android:id="@+id/nav_student_detail"
+        android:name="com.tangonoches.teacher.presentation.main.ui.student.studentDetail.StudentDetailFragment"
+        android:label="@string/menu_student_detail_title"
+        tools:layout="@layout/frag_students_all" />
+
+    <fragment
+        android:id="@+id/nav_student_scan"
+        android:name="com.tangonoches.teacher.presentation.main.ui.lessons.scanStudent.ScanStudentsFragment"
+        android:label="@string/scan_students_title"
+        tools:layout="@layout/frag_scan_students" />
+
+    <fragment
+        android:id="@+id/nav_lessons_detail"
+        android:name="com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail.LessonDetailFragment"
+        android:label="@string/menu_lessons_detail"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_tickets_all"
+        android:name="com.tangonoches.teacher.presentation.main.ui.tickets.ticketsAll.TicketsAllFragment"
+        android:label="@string/menu_tickets_all"
+        tools:layout="@layout/frag_tickets_all" />
+
+    <fragment
+        android:id="@+id/nav_ticket_create"
+        android:name="com.tangonoches.teacher.presentation.main.ui.tickets.ticketCreate.TicketCreateFragment"
+        android:label="@string/ticket_create_title"
+        tools:layout="@layout/frag_ticket_create" />
+</navigation>

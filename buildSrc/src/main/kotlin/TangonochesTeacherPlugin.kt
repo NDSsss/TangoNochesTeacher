@@ -1,0 +1,1 @@
+class TangonochesTeacherPlugin: BaseTangonochesAppPlugin(TangonochesApp.Teacher)

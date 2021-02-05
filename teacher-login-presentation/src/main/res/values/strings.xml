@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="act_login_email_et_hint">Email</string>
+    <string name="act_login_password_et_hint">Пароль</string>
+    <string name="act_login_login_btn">Войти</string>
+</resources>
