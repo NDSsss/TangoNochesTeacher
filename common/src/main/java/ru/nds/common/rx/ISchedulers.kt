@@ -9,10 +9,3 @@ interface ISchedulers {
     fun getIoScheduler(): Scheduler
     fun getMainThread(): Scheduler
 }
-
-class ISchedulersImpl: ISchedulers {
-    override fun getIoScheduler(): Scheduler = Schedulers.io()
-
-    override fun getMainThread(): Scheduler = AndroidSchedulers.mainThread()
-
-}

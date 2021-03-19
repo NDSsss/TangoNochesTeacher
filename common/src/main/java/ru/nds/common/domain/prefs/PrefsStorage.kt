@@ -6,7 +6,7 @@ const val PREFS_NAME = "TOKEN_PREFS"
 const val TEACHER_TOKEN = "TEACHER_TOKEN"
 const val TEACHER_EMAIL = "TEACHER_MAIL"
 
-class PrefsStorage(private val context: Context) : IPrefsStorage {
+internal class PrefsStorage(private val context: Context) : IPrefsStorage {
     override var teacherToken: String
         get() = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)?.getString(
             TEACHER_TOKEN,

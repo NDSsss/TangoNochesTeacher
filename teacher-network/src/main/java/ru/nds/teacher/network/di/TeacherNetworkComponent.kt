@@ -6,6 +6,7 @@ import dagger.Component
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import ru.nds.common.di.CommonComponent
+import ru.nds.common.navigation.CoordinatorProvider
 import ru.nds.common.rx.ISchedulers
 import ru.nds.core.domain.prefs.IPrefsStorage
 import ru.nds.teacher.network.di.module.InterceptorsModule
@@ -27,6 +28,7 @@ interface TeacherNetworkComponent {
 
     fun provideContext(): Context
     fun provideSchedulers(): ISchedulers
+    fun provideCoordinatorProvider(): CoordinatorProvider
     fun provideIPrefsStorage(): IPrefsStorage
     fun provideRetrofit(): Retrofit
 }

@@ -7,6 +7,7 @@ import dagger.Component
 import dagger.Subcomponent
 import ru.nds.common.di.module.CommonModule
 import ru.nds.common.di.module.PrefsModule
+import ru.nds.common.navigation.CoordinatorProvider
 import ru.nds.common.rx.ISchedulers
 import ru.nds.core.domain.prefs.IPrefsStorage
 import javax.inject.Singleton
@@ -26,5 +27,6 @@ interface CommonComponent {
 
     fun provideContext(): Context
     fun provideSchedulers(): ISchedulers
+    fun provideCoordinatorProvider(): CoordinatorProvider
     fun provideIPrefsStorage(): IPrefsStorage
 }

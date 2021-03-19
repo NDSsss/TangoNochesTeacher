@@ -1,17 +1,19 @@
 package ru.nds.teacher.presentation.login
 
+import android.content.Intent
 import com.jakewharton.rxbinding2.view.clicks
 import kotlinx.android.synthetic.main.teach_act_login.*
 import ru.nds.core.presentation.base.BaseVmActivity
 import ru.nds.teacher.BuildConfig
 import ru.nds.teacher.R
+import ru.nds.teacher.di.TeacherLoginComponentHolder
 
 class LoginActivity : BaseVmActivity<LoginVm>() {
     override fun getVmClass(): Class<LoginVm> =
         LoginVm::class.java
 
     override fun injectWrapper() {
-        TODO("Not yet implemented")
+        TeacherLoginComponentHolder.teacherLoginComponent.inject(vmFactoryWrapper)
     }
 
     override val layoutId: Int = R.layout.teach_act_login
@@ -34,7 +36,7 @@ class LoginActivity : BaseVmActivity<LoginVm>() {
                 loginSuccess()
             }
         )
-        if(BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             teacher_act_login_et_email.setText("noname@mail.ru")
             teacher_act_login_et_password.setText("12345678")
         }

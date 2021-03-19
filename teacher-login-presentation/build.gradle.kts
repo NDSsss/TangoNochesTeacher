@@ -24,6 +24,7 @@ dependencies {
 
     implementation(project(Modules.common))
     implementation(project(Modules.arch))
+    implementation(project(Modules.teacherNetwork))
     implementation(project(Modules.Teacher.Login.domain))
     implementation(project(Modules.Teacher.Login.data))
     implementation(Dependencies.AndroidX.constraintLayout)

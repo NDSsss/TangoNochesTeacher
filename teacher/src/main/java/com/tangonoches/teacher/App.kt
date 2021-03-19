@@ -18,11 +18,6 @@ class App : MultiDexApplication() {
     private fun initComponents() {
         CommonComponentHolder.commonComponent =
             DaggerCommonComponent.builder().application(this).build()
-        TeacherNetworkComponentHolder.teacherNetworkComponent =
-            DaggerTeacherNetworkComponent.builder()
-                .commonComponent(CommonComponentHolder.commonComponent).build()
-        ComponentsHolder.mainComponent = DaggerMainComponent.builder()
-            .teacherNetworkComponent(TeacherNetworkComponentHolder.teacherNetworkComponent)
-            .build()
+        TeacherNetworkComponentHolder.init()
     }
 }
