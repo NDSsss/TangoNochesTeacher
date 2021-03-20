@@ -9,7 +9,7 @@ import ru.nds.core.presentation.base.BaseVm
 import java.util.*
 import javax.inject.Inject
 
-class TicketCreateVm @Inject constructor(
+class TicketCreateVm(
     private val ticketsInteractor: ITicketsInteractor
 ) : BaseVm() {
 

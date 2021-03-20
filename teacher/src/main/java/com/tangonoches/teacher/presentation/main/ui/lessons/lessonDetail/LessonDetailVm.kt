@@ -14,7 +14,7 @@ import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonDet
 import io.reactivex.Single
 import javax.inject.Inject
 
-class LessonDetailVm @Inject constructor(
+class LessonDetailVm(
     private val lessonsInteractor: ILessonsInteractor,
     private val lessonEditor: ILessonEditor
 ) : BaseVm() {

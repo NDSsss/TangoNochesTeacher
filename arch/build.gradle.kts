@@ -22,11 +22,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
     implementation(project(Modules.common))
+    implementation(Dependencies.Koin.Android.viewModel)
 
     implementation(Dependencies.Reactivex.RxJava2.rxJava)
     implementation(Dependencies.AndroidX.Lifecycle.lifecycleExtensions)
-    implementation(Dependencies.Google.Dagger.dagger)
-    kapt(Dependencies.Google.Dagger.daggerCompiler)
+    implementation(Dependencies.Koin.Android.android)
 
     implementation(Dependencies.SquareUp.Retrofit.retrofit)
     implementation(Dependencies.SquareUp.Retrofit.converterGson)

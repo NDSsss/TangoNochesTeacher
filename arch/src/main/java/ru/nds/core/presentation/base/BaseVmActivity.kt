@@ -3,37 +3,28 @@ package ru.nds.core.presentation.base
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import io.reactivex.disposables.CompositeDisposable
-import ru.nds.core.di.utils.vm.VmFactoryWrapper
+import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
-abstract class BaseVmActivity<VM : BaseVm> : AppCompatActivity() {
+abstract class BaseVmActivity<VM : BaseVm>(
+    vmClass: KClass<VM>
+) : AppCompatActivity() {
 
     protected abstract val layoutId: Int
 
-    protected val vmFactoryWrapper = VmFactoryWrapper()
-
-    protected val vm: VM by lazy {
-        ViewModelProviders
-            .of(this, vmFactoryWrapper.factory)
-            .get(getVmClass())
-    }
+    protected val vm: VM by viewModel(clazz = vmClass)
 
     protected val vmBinds: CompositeDisposable = CompositeDisposable()
 
     protected val eventBinds: CompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        ComponentsHolder.mainComponent.inject(vmFactoryWrapper)
-        injectWrapper()
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
         vm.viewCreated()
         initEvents()
     }
-
-    abstract fun injectWrapper()
 
     open protected fun initEvents() {
 
@@ -56,10 +47,6 @@ abstract class BaseVmActivity<VM : BaseVm> : AppCompatActivity() {
         vmBinds.clear()
         super.onPause()
     }
-
-    protected fun getVmFactory(): ViewModelProvider.Factory = vmFactoryWrapper.factory
-
-    protected abstract fun getVmClass(): Class<VM>
 
     protected fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()

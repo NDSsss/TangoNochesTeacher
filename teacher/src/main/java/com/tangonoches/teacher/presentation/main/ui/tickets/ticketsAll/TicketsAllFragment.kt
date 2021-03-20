@@ -9,14 +9,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tangonoches.teacher.R
-import com.tangonoches.teacher.presentation.base.BaseTeacherFragment
 import kotlinx.android.synthetic.main.frag_tickets_all.*
+import ru.nds.core.presentation.base.BaseVmFragment
 
-class TicketsAllFragment : BaseTeacherFragment<TicketsAllVm>() {
+class TicketsAllFragment : BaseVmFragment<TicketsAllVm>(TicketsAllVm::class) {
 
     override val layoutId: Int = R.layout.frag_tickets_all
-
-    override fun getVmClass(): Class<TicketsAllVm> = TicketsAllVm::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

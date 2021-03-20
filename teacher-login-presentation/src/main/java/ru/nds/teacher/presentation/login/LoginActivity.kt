@@ -1,21 +1,13 @@
 package ru.nds.teacher.presentation.login
 
-import android.content.Intent
 import com.jakewharton.rxbinding2.view.clicks
 import kotlinx.android.synthetic.main.teach_act_login.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import ru.nds.core.presentation.base.BaseVmActivity
 import ru.nds.teacher.BuildConfig
 import ru.nds.teacher.R
-import ru.nds.teacher.di.TeacherLoginComponentHolder
 
-class LoginActivity : BaseVmActivity<LoginVm>() {
-    override fun getVmClass(): Class<LoginVm> =
-        LoginVm::class.java
-
-    override fun injectWrapper() {
-        TeacherLoginComponentHolder.teacherLoginComponent.inject(vmFactoryWrapper)
-    }
-
+class LoginActivity : BaseVmActivity<LoginVm>(LoginVm::class) {
     override val layoutId: Int = R.layout.teach_act_login
 
     override fun initEvents() {

@@ -4,9 +4,8 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import ru.nds.core.presentation.base.BaseVm
 import ru.nds.teacher.login.domain.interactor.ILoginInteractor
 import ru.nds.teacher.presentation.model.toModel
-import javax.inject.Inject
 
-class LoginVm @Inject constructor(
+class LoginVm(
     private val loginRepository: ILoginInteractor
 ) : BaseVm() {
     val loginEvent = BehaviorRelay.create<Pair<String, String>>()

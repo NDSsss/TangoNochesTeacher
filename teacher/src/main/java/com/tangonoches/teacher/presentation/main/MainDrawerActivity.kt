@@ -20,15 +20,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.tangonoches.teacher.R
-import com.tangonoches.teacher.presentation.base.BaseTeacherActivity
 import com.tangonoches.teacher.presentation.base.IActivityInterface
 import kotlinx.android.synthetic.main.content_main_drawer.*
+import ru.nds.core.presentation.base.BaseVmActivity
 
-class MainDrawerActivity : BaseTeacherActivity<MainDrawerVm>(), IActivityInterface {
+class MainDrawerActivity : BaseVmActivity<MainDrawerVm>(MainDrawerVm::class), IActivityInterface {
     override val layoutId: Int = R.layout.activity_main_drawer
-
-    override fun getVmClass(): Class<MainDrawerVm> =
-        MainDrawerVm::class.java
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var tvEmail: AppCompatTextView

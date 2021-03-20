@@ -11,4 +11,5 @@ java {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${Dependencies.kotlinVer}")
     implementation(Dependencies.Reactivex.RxJava2.rxJava)
+    implementation(Dependencies.Koin.Android.android)
 }

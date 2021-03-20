@@ -9,15 +9,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tangonoches.teacher.R
-import com.tangonoches.teacher.presentation.base.BaseTeacherFragment
 import com.tangonoches.teacher.presentation.main.ui.student.studentDetail.STUDENT_ID
 import com.tangonoches.teacher.presentation.main.ui.student.studentDetail.STUDENT_VIEW_TYPE
 import com.tangonoches.teacher.presentation.main.ui.tickets.ticketCreate.DEFAULT_STUDENT_ID
 import kotlinx.android.synthetic.main.frag_students_all.*
+import ru.nds.core.presentation.base.BaseVmFragment
 
-class StudentsAllFragment : BaseTeacherFragment<StudentsAllVm>() {
+class StudentsAllFragment : BaseVmFragment<StudentsAllVm>(StudentsAllVm::class) {
     override val layoutId: Int = R.layout.frag_students_all
-    override fun getVmClass(): Class<StudentsAllVm> = StudentsAllVm::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

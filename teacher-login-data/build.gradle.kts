@@ -23,6 +23,8 @@ dependencies {
     implementation(project(Modules.arch))
     implementation(project(Modules.Teacher.Login.domain))
 
+    implementation(Dependencies.Koin.Android.android)
+
     implementation(Dependencies.SquareUp.Retrofit.retrofit)
     implementation(Dependencies.SquareUp.Retrofit.adapterRxJava2)
     implementation(Dependencies.Reactivex.RxJava2.rxJava)

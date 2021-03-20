@@ -28,8 +28,8 @@ dependencies {
     implementation(project(Modules.Teacher.Login.domain))
     implementation(project(Modules.Teacher.Login.data))
     implementation(Dependencies.AndroidX.constraintLayout)
-    implementation(Dependencies.Google.Dagger.dagger)
-    kapt(Dependencies.Google.Dagger.daggerCompiler)
+    implementation(Dependencies.Koin.Android.android)
+    implementation(Dependencies.Koin.Android.viewModel)
     implementation(Dependencies.Reactivex.RxJava2.rxJava)
 
     implementation(Dependencies.Jakewharton.RxRelay2.rxRelay)

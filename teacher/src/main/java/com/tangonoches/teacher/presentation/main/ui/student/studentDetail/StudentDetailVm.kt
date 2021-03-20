@@ -12,7 +12,7 @@ import com.tangonoches.teacher.presentation.main.ui.student.allStudents.Students
 import io.reactivex.Single
 import javax.inject.Inject
 
-class StudentDetailVm @Inject constructor(
+class StudentDetailVm(
     private val studentsInteractor: IStudentsInteractor
 ) : BaseVm() {
     val viewTypeState = BehaviorRelay.create<StudentsAllFragment.StudentDetailViewType>()

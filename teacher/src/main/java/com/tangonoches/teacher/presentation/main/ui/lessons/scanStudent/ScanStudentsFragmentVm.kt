@@ -6,7 +6,7 @@ import com.tangonoches.teacher.domain.editors.lesson.ILessonEditor
 import ru.nds.core.presentation.base.BaseVm
 import javax.inject.Inject
 
-class ScanStudentsFragmentVm @Inject constructor(
+class ScanStudentsFragmentVm(
     private val lessonEditor: ILessonEditor
 ) : BaseVm() {
     var permissionsGranted = false

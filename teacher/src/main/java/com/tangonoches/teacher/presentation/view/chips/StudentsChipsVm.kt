@@ -3,7 +3,7 @@ package com.tangonoches.teacher.presentation.view.chips
 import com.tangonoches.teacher.domain.editors.lesson.ILessonEditor
 import javax.inject.Inject
 
-class StudentsChipsVm @Inject constructor(
+class StudentsChipsVm(
     private val lessonEditor: ILessonEditor
 ) : BaseChipsWidgetVm() {
 

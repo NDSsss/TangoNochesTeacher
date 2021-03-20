@@ -1,23 +1,37 @@
 package com.tangonoches.teacher
 
 import androidx.multidex.MultiDexApplication
-import com.tangonoches.teacher.di.ComponentsHolder
-import com.tangonoches.teacher.di.components.DaggerMainComponent
-import ru.nds.common.di.CommonComponentHolder
-import ru.nds.common.di.DaggerCommonComponent
-import ru.nds.teacher.network.di.DaggerTeacherNetworkComponent
-import ru.nds.teacher.network.di.TeacherNetworkComponentHolder
+import com.tangonoches.teacher.di.modules.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.startKoin
+import ru.nds.common.di.commonModule
+import ru.nds.common.di.prefsModule
+import ru.nds.teacher.di.module.teacherLoginPresentationVmModule
+import ru.nds.teacher.network.di.module.netModule
+import ru.nds.teacher.network.di.module.teacherInterceptorModule
 
 class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        initComponents()
+        initKoin()
     }
 
-    private fun initComponents() {
-        CommonComponentHolder.commonComponent =
-            DaggerCommonComponent.builder().application(this).build()
-        TeacherNetworkComponentHolder.init()
+    private fun initKoin() {
+        startKoin {
+            androidContext(this@App)
+        }
+        loadKoinModules(commonModule)
+        loadKoinModules(prefsModule)
+        loadKoinModules(teacherInterceptorModule)
+        loadKoinModules(netModule)
+        loadKoinModules(teacherLoginPresentationVmModule)
+        loadKoinModules(monolitVmModule)
+        loadKoinModules(monoliteEditorsModule)
+        loadKoinModules(monolitInteractorsModule)
+        loadKoinModules(monolitRepositoriesModule)
+        loadKoinModules(monolitServicesModule)
+        loadKoinModules(monolitWebDataSourceModule)
     }
 }

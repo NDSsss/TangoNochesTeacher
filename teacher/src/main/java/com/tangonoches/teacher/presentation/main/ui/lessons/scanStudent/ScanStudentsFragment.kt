@@ -9,22 +9,19 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.jakewharton.rxbinding2.view.clicks
 import com.tangonoches.teacher.R
-import com.tangonoches.teacher.presentation.base.BaseTeacherFragment
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.frag_scan_students.*
 import me.dm7.barcodescanner.zbar.Result
 import me.dm7.barcodescanner.zbar.ZBarScannerView
+import ru.nds.core.presentation.base.BaseVmFragment
 import java.util.concurrent.TimeUnit
 
 const val CAMERA_PERMISSIONS_REQUEST = 1234
 
-class ScanStudentsFragment : BaseTeacherFragment<ScanStudentsFragmentVm>(),
+class ScanStudentsFragment : BaseVmFragment<ScanStudentsFragmentVm>(ScanStudentsFragmentVm::class),
     ZBarScannerView.ResultHandler {
     override val layoutId: Int = R.layout.frag_scan_students
-
-    override fun getVmClass(): Class<ScanStudentsFragmentVm> =
-        ScanStudentsFragmentVm::class.java
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

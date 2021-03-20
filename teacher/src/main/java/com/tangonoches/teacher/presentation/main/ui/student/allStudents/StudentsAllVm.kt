@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class StudentsAllVm @Inject constructor(
+class StudentsAllVm(
     private val studentsInteractor: IStudentsInteractor
 ) : BaseVm() {
     val studentsState = BehaviorRelay.create<List<StudentShortModel>>()

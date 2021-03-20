@@ -1,25 +1,17 @@
 package ru.nds.teacher.di.module
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import dagger.Binds
-import dagger.Module
-import dagger.multibindings.IntoMap
-import ru.nds.core.di.utils.vm.VmFactory
-import ru.nds.core.di.utils.vm.VmKeyName
-import ru.nds.teacher.di.TeacherLoginScope
+import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.dsl.module
+import ru.nds.teacher.login.data.di.teacherLoginDataModule
+import ru.nds.teacher.login.domain.di.teacherLoginDomainModule
 import ru.nds.teacher.presentation.login.LoginVm
 
-@Module
-internal interface VmModule {
-
-    @Binds
-    @IntoMap
-    @VmKeyName(LoginVm::class)
-    @TeacherLoginScope
-    fun bindLoginVm(loginVm: LoginVm): ViewModel
-
-    @Binds
-    @TeacherLoginScope
-    fun provideViewModelFactory(vmFactory: VmFactory): ViewModelProvider.Factory
-}
+val teacherLoginPresentationVmModule = module {
+    viewModel {
+        LoginVm(
+            loginRepository = get()
+        )
+    }
+}.plus(
+    teacherLoginDataModule
+).plus(teacherLoginDomainModule)

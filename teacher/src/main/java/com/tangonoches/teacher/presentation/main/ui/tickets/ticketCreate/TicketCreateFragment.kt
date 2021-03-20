@@ -8,21 +8,20 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.data.models.*
 import com.tangonoches.teacher.domain.repositories.constants.DEFAULT_ID
-import com.tangonoches.teacher.presentation.base.BaseTeacherFragment
 import com.tangonoches.teacher.presentation.base.GroupsSpinnerAdapter
 import com.tangonoches.teacher.presentation.main.ui.lessons.lessonDetail.closeSpinner
 import com.tangonoches.teacher.presentation.main.ui.tickets.ticketCreate.TicketCreateFragment.DatePickerType.END
 import com.tangonoches.teacher.presentation.main.ui.tickets.ticketCreate.TicketCreateFragment.DatePickerType.START
 import com.tangonoches.teacher.presentation.view.dialogScanStudent.ScanStudentDialog
 import kotlinx.android.synthetic.main.frag_ticket_create.*
+import ru.nds.core.presentation.base.BaseVmFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
 const val DEFAULT_STUDENT_ID = "DEFAULT_STUDENT_ID"
 
-class TicketCreateFragment : BaseTeacherFragment<TicketCreateVm>() {
+class TicketCreateFragment : BaseVmFragment<TicketCreateVm>(TicketCreateVm::class) {
     override val layoutId: Int = R.layout.frag_ticket_create
-    override fun getVmClass(): Class<TicketCreateVm> = TicketCreateVm::class.java
 
     override fun preCreateVmBinds() {
         arguments?.let { args ->

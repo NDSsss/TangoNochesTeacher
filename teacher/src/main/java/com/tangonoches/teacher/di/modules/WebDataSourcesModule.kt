@@ -1,7 +1,5 @@
 package com.tangonoches.teacher.di.modules
 
-import com.google.gson.Gson
-import com.tangonoches.teacher.di.TeacherScope
 import com.tangonoches.teacher.domain.datasources.web.groups.GroupsDataSource
 import com.tangonoches.teacher.domain.datasources.web.groups.IGroupsDataSource
 import com.tangonoches.teacher.domain.datasources.web.lessons.ILessonsDataSource
@@ -16,67 +14,28 @@ import com.tangonoches.teacher.domain.datasources.web.ticketEventTypes.ITicketEv
 import com.tangonoches.teacher.domain.datasources.web.ticketEventTypes.TicketEventTypesDataSource
 import com.tangonoches.teacher.domain.datasources.web.tickets.ITicketsDataSource
 import com.tangonoches.teacher.domain.datasources.web.tickets.TicketsDataSource
-import com.tangonoches.teacher.domain.repositories.constants.IConstantsRepository
-import com.tangonoches.teacher.domain.services.*
-import dagger.Module
-import dagger.Provides
-import ru.nds.common.rx.ISchedulers
+import org.koin.dsl.module
 
-@Module
-class WebDataSourcesModule {
-//    @Provides
-//    @TeacherScope
-//    fun provideLoginDataSource(loginService: LoginService): ILoginDataSource =
-//        LoginDataSource(loginService)
-
-    @Provides
-    @TeacherScope
-    fun provideLessonsDataSource(
-        schedulers: ISchedulers,
-        consRepository: IConstantsRepository,
-        lessonsService: LessonsService
-    ): ILessonsDataSource = LessonsDataSource(schedulers, consRepository, lessonsService)
-
-    @Provides
-    @TeacherScope
-    fun provideGroupsDataSource(
-        schedulers: ISchedulers,
-        groupsService: GroupsService
-    ): IGroupsDataSource = GroupsDataSource(schedulers, groupsService)
-
-    @Provides
-    @TeacherScope
-    fun provideTicketEventTypesDataSource(
-        schedulers: ISchedulers,
-        service: TicketEventTypesService
-    ): ITicketEventTypesDataSource = TicketEventTypesDataSource(schedulers, service)
-
-    @Provides
-    @TeacherScope
-    fun provideTicketCountTypesDataSource(
-        schedulers: ISchedulers,
-        service: TicketCountTypesService
-    ): ITicketCountTypesDataSource = TicketCountTypesDataSource(schedulers, service)
-
-    @Provides
-    @TeacherScope
-    fun provideStudentsDataSource(
-        schedulers: ISchedulers,
-        service: StudentsService,
-        gson: Gson
-    ): IStudentsDataSource = StudentsDataSource(schedulers, service, gson)
-
-    @Provides
-    @TeacherScope
-    fun provideTeachersDataSource(
-        schedulers: ISchedulers,
-        service: TeachersService
-    ): ITeachersDataSource = TeachersDataSource(schedulers, service)
-
-    @Provides
-    @TeacherScope
-    fun provideTicketsDataSource(
-        schedulers: ISchedulers,
-        service: TicketsService
-    ): ITicketsDataSource = TicketsDataSource(schedulers, service)
+val monolitWebDataSourceModule = module {
+    factory<ILessonsDataSource> {
+        LessonsDataSource(schedulers = get(), constantsRepository = get(), lessonsService = get())
+    }
+    factory<IGroupsDataSource> {
+        GroupsDataSource(schedulers = get(), groupsService = get())
+    }
+    factory<ITicketEventTypesDataSource> {
+        TicketEventTypesDataSource(schedulers = get(), ticketEventTypesService = get())
+    }
+    factory<ITicketCountTypesDataSource> {
+        TicketCountTypesDataSource(schedulers = get(), ticketCountTypesService = get())
+    }
+    factory<IStudentsDataSource> {
+        StudentsDataSource(schedulers = get(), studentsService = get(), gson = get())
+    }
+    factory<ITeachersDataSource> {
+        TeachersDataSource(schedulers = get(), teachersService = get())
+    }
+    factory<ITicketsDataSource> {
+        TicketsDataSource(schedulers = get(), ticketsService = get())
+    }
 }

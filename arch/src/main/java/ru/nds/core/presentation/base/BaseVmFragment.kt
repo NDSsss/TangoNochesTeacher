@@ -6,40 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import io.reactivex.disposables.CompositeDisposable
-import ru.nds.core.di.utils.vm.VmFactoryWrapper
+import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
-abstract class BaseVmFragment<VM : BaseVm> : Fragment() {
+abstract class BaseVmFragment<VM : BaseVm>(val type: KClass<VM>) : Fragment() {
 
     protected abstract val layoutId: Int
 
-    protected val vmFactoryWrapper = VmFactoryWrapper()
-
-    protected val vm: VM by lazy {
-        ViewModelProviders
-            .of(this, vmFactoryWrapper.factory)
-            .get(getVmClass())
-    }
+    protected val vm: VM by viewModel(clazz = type)
 
     protected var firstStart = true
     protected var firstViewCreate = true
-
-    protected abstract fun getVmClass(): Class<VM>
 
     protected val vmBinds: CompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("lifecycle", "${this::class.java.simpleName} onCreate")
-        injectWrapper()
         preCreateVmBinds()
         vm.viewCreated()
         super.onCreate(savedInstanceState)
     }
-
-    abstract fun injectWrapper()
 
     protected open fun preCreateVmBinds() {
 

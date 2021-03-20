@@ -83,12 +83,10 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("com.google.firebase:firebase-analytics:18.0.0")
     implementation("com.google.firebase:firebase-messaging:21.0.1")
-    implementation(Dependencies.Google.Dagger.dagger)
-    kapt(Dependencies.Google.Dagger.daggerCompiler)
-    kaptAndroidTest(ext["daggerCompiler"] as String)
-    compileOnly(ext["daggerAnnotations"] as String)
-    kaptTest(ext["daggerCompiler"] as String)
-    testAnnotationProcessor(ext["daggerAnnotations"] as String)
+    implementation(Dependencies.Koin.Android.android)
+
+    implementation(Dependencies.Koin.Android.android)
+    implementation(Dependencies.Koin.Android.viewModel)
 
     testImplementation(ext["jUnit"] as String)
     androidTestImplementation(ext["testRunner"] as String)

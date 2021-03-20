@@ -7,9 +7,8 @@ import com.tangonoches.teacher.data.models.GroupFullModel
 import com.tangonoches.teacher.data.models.LessonShortModel
 import com.tangonoches.teacher.domain.interactors.ILessonsInteractor
 import ru.nds.core.presentation.base.BaseVm
-import javax.inject.Inject
 
-class LessonsVm @Inject constructor(
+class LessonsVm(
     private val lessonsInteractor: ILessonsInteractor
 ) : BaseVm() {
 
@@ -71,7 +70,7 @@ class LessonsVm @Inject constructor(
                 binds.add(
                     lessonsInteractor.refreshLessons()
                         .subLoading()
-                        .subWithDefaultError{
+                        .subWithDefaultError {
 
                         }
                 )

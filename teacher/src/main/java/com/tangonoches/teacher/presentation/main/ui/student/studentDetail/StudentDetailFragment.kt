@@ -9,19 +9,17 @@ import com.jakewharton.rxbinding2.widget.textChanges
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.domain.extensions.setTextIfNotEqual
 import com.tangonoches.teacher.domain.repositories.constants.DEFAULT_ID
-import com.tangonoches.teacher.presentation.base.BaseTeacherFragment
 import com.tangonoches.teacher.presentation.main.ui.student.allStudents.StudentsAllFragment
 import kotlinx.android.synthetic.main.frag_student_detail.*
 import okhttp3.internal.toLongOrDefault
+import ru.nds.core.presentation.base.BaseVmFragment
 
 const val STUDENT_VIEW_TYPE = "STUDENT_VIEW_TYPE"
 const val STUDENT_ID = "STUDENT_ID"
 
-class StudentDetailFragment : BaseTeacherFragment<StudentDetailVm>() {
+class StudentDetailFragment : BaseVmFragment<StudentDetailVm>(StudentDetailVm::class) {
     override val layoutId: Int
         get() = R.layout.frag_student_detail
-
-    override fun getVmClass(): Class<StudentDetailVm> = StudentDetailVm::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -28,6 +28,14 @@ object Dependencies {
         }
     }
 
+    object Koin {
+        object Android {
+            private const val koinVersion ="2.0.1"
+            const val android = "org.koin:koin-android:$koinVersion"
+            const val viewModel = "org.koin:koin-android-viewmodel:$koinVersion"
+        }
+    }
+
     object Reactivex {
         object RxJava2 {
             private const val rxJavaVersion = "2.2.15"

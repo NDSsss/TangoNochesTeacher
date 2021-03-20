@@ -12,7 +12,6 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.tangonoches.teacher.R
 import com.tangonoches.teacher.data.models.getSelectedPosition
-import com.tangonoches.teacher.presentation.base.BaseTeacherFragment
 import com.tangonoches.teacher.presentation.base.GroupsSpinnerAdapter
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LESSON_DETAIL_ID
 import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LESSON_DETAIL_VIEW_TYPE
@@ -20,23 +19,16 @@ import com.tangonoches.teacher.presentation.main.ui.lessons.allLessons.LessonDet
 import com.tangonoches.teacher.presentation.view.chips.StudentsChipsVm
 import com.tangonoches.teacher.presentation.view.chips.TeacherChipsVm
 import kotlinx.android.synthetic.main.frag_lesson_detail.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import ru.nds.core.presentation.base.BaseVmFragment
 
-class LessonDetailFragment : BaseTeacherFragment<LessonDetailVm>() {
+class LessonDetailFragment : BaseVmFragment<LessonDetailVm>(LessonDetailVm::class) {
 
     override val layoutId: Int = R.layout.frag_lesson_detail
 
-    override fun getVmClass(): Class<LessonDetailVm> =
-        LessonDetailVm::class.java
+    private val teachersChipsWidgetVm: TeacherChipsVm by  viewModel()
 
-    private val teachersChipsWidgetVm: TeacherChipsVm by lazy {
-        ViewModelProviders.of(this, vmFactoryWrapper.factory)
-            .get(TeacherChipsVm::class.java)
-    }
-
-    private val studentsChipsWidgetVm: StudentsChipsVm by lazy {
-        ViewModelProviders.of(this, vmFactoryWrapper.factory)
-            .get(StudentsChipsVm::class.java)
-    }
+    private val studentsChipsWidgetVm: StudentsChipsVm by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

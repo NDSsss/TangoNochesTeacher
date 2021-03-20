@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class TicketsAllVm @Inject constructor(
+class TicketsAllVm(
     private val ticketsInteractor: ITicketsInteractor
 ) : BaseVm() {
 

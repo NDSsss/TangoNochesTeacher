@@ -1,54 +1,36 @@
 package com.tangonoches.teacher.di.modules
 
-import com.tangonoches.teacher.di.TeacherScope
 import com.tangonoches.teacher.domain.services.*
-import dagger.Module
-import dagger.Provides
+import org.koin.dsl.module
 import retrofit2.Retrofit
-import javax.inject.Singleton
 
-@Module
-class ServicesModule {
-
-//    @Provides
-//    @TeacherScope
-//    fun providesLoginService(retrofit: Retrofit): LoginService =
-//        retrofit.create(LoginService::class.java)
-
-    @Provides
-    @TeacherScope
-    fun providesLessonsService(retrofit: Retrofit): LessonsService =
+val monolitServicesModule = module {
+    factory<LessonsService> {
+        val retrofit: Retrofit = get<Retrofit>()
         retrofit.create(LessonsService::class.java)
-
-    @Provides
-    @TeacherScope
-    fun providesGroupsService(retrofit: Retrofit): GroupsService =
+    }
+    factory<GroupsService> {
+        val retrofit: Retrofit = get<Retrofit>()
         retrofit.create(GroupsService::class.java)
-
-    @Provides
-    @TeacherScope
-    fun providesTicketEventTypesService(retrofit: Retrofit): TicketEventTypesService =
+    }
+    factory<TicketEventTypesService> {
+        val retrofit: Retrofit = get<Retrofit>()
         retrofit.create(TicketEventTypesService::class.java)
-
-    @Provides
-    @TeacherScope
-    fun providesTicketCountTypesService(retrofit: Retrofit): TicketCountTypesService =
+    }
+    factory<TicketCountTypesService> {
+        val retrofit: Retrofit = get<Retrofit>()
         retrofit.create(TicketCountTypesService::class.java)
-
-    @Provides
-    @TeacherScope
-    fun providesStudentsService(retrofit: Retrofit): StudentsService =
+    }
+    factory<StudentsService> {
+        val retrofit: Retrofit = get<Retrofit>()
         retrofit.create(StudentsService::class.java)
-
-    @Provides
-    @TeacherScope
-    fun providesTeachersService(retrofit: Retrofit): TeachersService =
+    }
+    factory<TeachersService> {
+        val retrofit: Retrofit = get<Retrofit>()
         retrofit.create(TeachersService::class.java)
-
-    @Provides
-    @TeacherScope
-    fun providesTicketsService(retrofit: Retrofit): TicketsService =
+    }
+    factory<TicketsService> {
+        val retrofit: Retrofit = get<Retrofit>()
         retrofit.create(TicketsService::class.java)
-
-
+    }
 }
