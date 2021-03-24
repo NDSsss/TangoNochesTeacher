@@ -15,7 +15,7 @@ class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        initKoin()
+        initKoin()wwwww
     }
 
     private fun initKoin() {
